@@ -14,7 +14,9 @@ public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
 		foreach (var (channel, _) in Inputs.GetAllEvents<PlayerConnectedEvent>()) {
 			var player1 = World.CreateEntity(new Player { InputChannel = channel });
 			player1.Set(new Transform {
-				Position = new FVector3(_massiveRandom.NextInt(-5, 5).ToFP(), 10.ToFP(),
+				Position = new FVector3(
+					_massiveRandom.NextInt(-5, 5).ToFP(), 
+					10.ToFP(),
 					_massiveRandom.NextInt(-5, 5).ToFP())
 			});
 			player1.Set(new ViewAsset { PackedScenePath = "uid://c5t8fo6tmhs08" });

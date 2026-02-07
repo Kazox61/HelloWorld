@@ -11,7 +11,8 @@ namespace HelloWorld.Core.Systems;
 public class MovementSystem : NetSystem, IUpdate {
 	public void Update() {
 		World.ForEach((Entity entity, ref Player player, ref RigidBody rigidBody, ref Transform transform) => {
-			var playerInput = Inputs.GetInput<PlayerInput>(player.InputChannel).LastFresh();
+			var input = Inputs.GetInput<PlayerInput>(player.InputChannel);
+			var playerInput = input.LastFresh();
 			var moveDir = new FVector3(playerInput.DirectionX.ToFP(), FP.Zero, playerInput.DirectionY.ToFP());
 			if (moveDir != FVector3.Zero) {
 				moveDir = FVector3.Normalize(moveDir);
@@ -32,7 +33,7 @@ public class MovementSystem : NetSystem, IUpdate {
 				);
 			}
 
-			if (playerInput.Jump) {
+			if (playerInput.Jump && input.IsFresh()) {
 				rigidBody.Velocity += new FVector3(
 					FP.Zero,
 					7.ToFP(),
