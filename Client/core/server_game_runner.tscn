@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://sgap8ouh3kie"]
+
+[ext_resource type="Script" uid="uid://2nn47seo2hcr" path="res://core/ServerGameRunner.cs" id="1_7p53p"]
+
+[node name="ServerGameRunner" type="Node" unique_id=1563208630]
+script = ExtResource("1_7p53p")

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c5t8fo6tmhs08"]
+
+[ext_resource type="Script" uid="uid://qaaedlnqhv7q" path="res://addons/massive-godot-integration/synchronizer/EntityView3d.cs" id="1_43feq"]
+[ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://core/resources/godot_plush/godot_plush_skin.tscn" id="1_vjlsr"]
+[ext_resource type="Script" uid="uid://cd1hxdoxapn8g" path="res://core/view_behavior/TransformViewBehavior.cs" id="3_7dqni"]
+[ext_resource type="Script" uid="uid://cje7a1nri72ep" path="res://core/view_behavior/PlayerViewBehavior.cs" id="4_43feq"]
+
+[node name="Player" type="Node3D" unique_id=324689971 node_paths=PackedStringArray("_viewBehaviors")]
+script = ExtResource("1_43feq")
+_viewBehaviors = [NodePath("TransformViewBehavior"), NodePath("PlayerViewBehavior")]
+
+[node name="GodotPlushSkin" parent="." unique_id=1916972161 instance=ExtResource("1_vjlsr")]
+
+[node name="TransformViewBehavior" type="Node" parent="." unique_id=2066113465 node_paths=PackedStringArray("_targetNode")]
+script = ExtResource("3_7dqni")
+_targetNode = NodePath("..")
+
+[node name="PlayerViewBehavior" type="Node" parent="." unique_id=726075329 node_paths=PackedStringArray("_plushSkin")]
+script = ExtResource("4_43feq")
+_plushSkin = NodePath("../GodotPlushSkin")
