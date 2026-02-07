@@ -58,7 +58,7 @@ namespace Massive.Netcode
 				PingMessage.Write(new PingMessage() { ClientPingSendTime = clientTime }, Connection.Outgoing);
 			}
 
-			Connection.FlushOutgoing();
+			Connection.PushOutgoing();
 
 			if (!Synced)
 			{
@@ -70,7 +70,7 @@ namespace Massive.Netcode
 
 		private void ReadMessages(double clientTime)
 		{
-			Connection.PopulateIncoming();
+			Connection.PollIncoming();
 
 			while (Connection.IsConnected && Connection.HasUnreadPayload)
 			{
@@ -142,7 +142,14 @@ namespace Massive.Netcode
 					{
 						var tick = Connection.Incoming.ReadInt();
 						var channel = Connection.Incoming.ReadShort();
-						MessageSerializer.ReadOneInput(messageId, tick, channel, Connection.Incoming);
+						if (CanAcceptTick(tick))
+						{
+							MessageSerializer.ReadOneInput(messageId, tick, channel, Connection.Incoming);
+						}
+						else
+						{
+							MessageSerializer.SkipOneInput(messageId, Connection.Incoming);
+						}
 						break;
 					}
 				}
@@ -159,6 +166,11 @@ namespace Massive.Netcode
 		void IPredictionReceiver.OnEventPredicted(IEventSet eventSet, int tick, int localOrder)
 		{
 			MessageSerializer.WriteOneInput(eventSet, tick, localOrder, Connection.Outgoing);
+		}
+
+		private bool CanAcceptTick(int tick)
+		{
+			return tick > TickSync.ApprovedSimulationTick;
 		}
 	}
 }

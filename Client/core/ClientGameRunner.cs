@@ -16,15 +16,8 @@ public partial class ClientGameRunner : Node {
 	public Session Session => Client.Session;
 
 	public override void _EnterTree() {
-		Callable.From(Start).CallDeferred();
-	}
-
-	private void Start() {
 		Client = new Massive.Netcode.Client(new SessionConfig(), new TcpConnection());
 		Client.InputIdentifiers.RegisterAutomaticallyFromAllAssemblies();
-		
-		GodotEntitySynchronization = new GodotEntitySynchronization(Session.World);
-		GodotEntitySynchronization.SubscribeViews();
 
 		GameSetup = new GameSetup();
 
@@ -37,22 +30,20 @@ public partial class ClientGameRunner : Node {
 		Session.Simulations.Add(systemsSimulation);
 
 		systemsSimulation.Initialize();
+		
+		GodotEntitySynchronization = new GodotEntitySynchronization(Session.World);
+		GodotEntitySynchronization.SubscribeViews();
 
 		Client.Connection.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1987));
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		if (Client == null) {
-			return;
-		}
-		
 		ClientTime += (float)delta;
 
-		var desiredTick = Client.TickSync.CalculateTargetTick(ClientTime);
 		var playerInput = CollectInput();
 
 		Client.Session.Inputs.SetPredictionInputAt(
-			desiredTick,
+			Client.InputPredictionTick(ClientTime),
 			Client.Connection.Channel,
 			playerInput
 		);
