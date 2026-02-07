@@ -16,6 +16,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_31qdj")
 script = ExtResource("1_wahqi")
 _viewBehaviors = [NodePath("TransformViewBehavior")]
 
-[node name="TransformViewBehavior" type="Node" parent="." unique_id=823922719 node_paths=PackedStringArray("_targetNode")]
+[node name="TransformViewBehavior" type="Node" parent="." unique_id=823922719 node_paths=PackedStringArray("_targetNodePosition", "_targetNodeRotation")]
 script = ExtResource("2_wahqi")
-_targetNode = NodePath("..")
+_targetNodePosition = NodePath("..")
+_targetNodeRotation = NodePath("..")

@@ -11,10 +11,15 @@ _viewBehaviors = [NodePath("TransformViewBehavior"), NodePath("PlayerViewBehavio
 
 [node name="GodotPlushSkin" parent="." unique_id=1916972161 instance=ExtResource("1_vjlsr")]
 
-[node name="TransformViewBehavior" type="Node" parent="." unique_id=2066113465 node_paths=PackedStringArray("_targetNode")]
+[node name="TransformViewBehavior" type="Node" parent="." unique_id=2066113465 node_paths=PackedStringArray("_targetNodePosition", "_targetNodeRotation")]
 script = ExtResource("3_7dqni")
-_targetNode = NodePath("..")
+_targetNodePosition = NodePath("..")
+_targetNodeRotation = NodePath("../GodotPlushSkin")
 
-[node name="PlayerViewBehavior" type="Node" parent="." unique_id=726075329 node_paths=PackedStringArray("_plushSkin")]
+[node name="PlayerViewBehavior" type="Node" parent="." unique_id=726075329 node_paths=PackedStringArray("_plushSkin", "_camera")]
 script = ExtResource("4_43feq")
 _plushSkin = NodePath("../GodotPlushSkin")
+_camera = NodePath("../Camera")
+
+[node name="Camera" type="Camera3D" parent="." unique_id=1951030475]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 8, 8)

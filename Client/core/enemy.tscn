@@ -17,6 +17,7 @@ _viewBehaviors = [NodePath("TransformViewBehavior")]
 mesh = SubResource("BoxMesh_pcg68")
 surface_material_override/0 = SubResource("StandardMaterial3D_pcg68")
 
-[node name="TransformViewBehavior" type="Node" parent="." unique_id=888779000 node_paths=PackedStringArray("_targetNode")]
+[node name="TransformViewBehavior" type="Node" parent="." unique_id=888779000 node_paths=PackedStringArray("_targetNodePosition", "_targetNodeRotation")]
 script = ExtResource("2_4ucuu")
-_targetNode = NodePath("..")
+_targetNodePosition = NodePath("..")
+_targetNodeRotation = NodePath("..")

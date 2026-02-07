@@ -15,6 +15,8 @@ public partial class ClientGameRunner : Node {
 	public IGameSetup GameSetup;
 	public Session Session => Client.Session;
 
+	public static int LocalPlayerChannel;
+
 	public override void _EnterTree() {
 		Client = new Massive.Netcode.Client(new SessionConfig(), new TcpConnection());
 		Client.InputIdentifiers.RegisterAutomaticallyFromAllAssemblies();
@@ -49,6 +51,7 @@ public partial class ClientGameRunner : Node {
 		);
 
 		Client.Update(ClientTime);
+		LocalPlayerChannel = Client.Connection.Channel;
 		GodotEntitySynchronization?.SynchronizeViews();
 	}
 	

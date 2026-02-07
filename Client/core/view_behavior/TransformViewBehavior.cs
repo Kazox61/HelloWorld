@@ -8,7 +8,8 @@ namespace HelloWorld.Client.Core;
 
 [GlobalClass]
 public partial class TransformViewBehavior : ViewBehavior {
-	[Export] private Node3D _targetNode;
+	[Export] private Node3D _targetNodePosition;
+	[Export] private Node3D _targetNodeRotation;
 
 	private DataSet<Transform> _transforms;
 	private Entity _entity;
@@ -28,12 +29,12 @@ public partial class TransformViewBehavior : ViewBehavior {
 		}
 		
 		var transform = _transforms.Get(_entity.Id);
-		_targetNode.Position = new Vector3(
+		_targetNodePosition.Position = new Vector3(
 			transform.Position.X.ToFloat(),
 			transform.Position.Y.ToFloat(),
 			transform.Position.Z.ToFloat()
 		);
-		_targetNode.Rotation = new Vector3(
+		_targetNodeRotation.Rotation = new Vector3(
 			transform.Rotation.X.ToFloat(),
 			transform.Rotation.Y.ToFloat(),
 			transform.Rotation.Z.ToFloat()

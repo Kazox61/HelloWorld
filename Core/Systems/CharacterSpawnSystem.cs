@@ -30,16 +30,6 @@ public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
 			player1.Set(new BoxCollider {
 				HalfExtents = new FVector3(0.5f.ToFP(), 0.8f.ToFP(), 0.5f.ToFP())
 			});
-
-			if (channel == 0) {
-				var camera = World.CreateEntity(new Camera());
-				camera.Set(new CameraTarget {
-					TargetEntifier = player1.Entifier,
-					Offset = new FVector3(FP.Zero, 8.ToFP(), 8.ToFP())
-				});
-				camera.Set(new ViewAsset { PackedScenePath = "uid://cuvlkk0lk1q5p" });
-				camera.Set(new Transform { Rotation = new FVector3(-45.ToFP() * FP.Deg2Rad, FP.Zero, FP.Zero) });
-			}
 		}
 	}
 
