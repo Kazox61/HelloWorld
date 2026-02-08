@@ -7,17 +7,16 @@ using Massive.Physics.Components;
 
 namespace HelloWorld.Core.Systems;
 
-public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
-	private MassiveRandom _massiveRandom = null!;
-
+public class CharacterSpawnSystem : NetSystem, IUpdate {
 	public void Update() {
 		foreach (var (channel, _) in Inputs.GetAllEvents<PlayerConnectedEvent>()) {
 			var player1 = World.CreateEntity(new Player { InputChannel = channel });
 			player1.Set(new Transform {
 				Position = new FVector3(
-					_massiveRandom.NextInt(-5, 5).ToFP(), 
+					channel.ToFP() * 2,
 					2.ToFP(),
-					_massiveRandom.NextInt(-5, 5).ToFP())
+					FP.Zero
+				)
 			});
 			player1.Set(new ViewAsset { PackedScenePath = "uid://c5t8fo6tmhs08" });
 			player1.Set(new RigidBody {
@@ -31,9 +30,5 @@ public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
 				HalfExtents = new FVector3(0.5f.ToFP(), 0.8f.ToFP(), 0.5f.ToFP())
 			});
 		}
-	}
-
-	public void Inject(MassiveRandom massiveRandom) {
-		_massiveRandom = massiveRandom;
 	}
 }

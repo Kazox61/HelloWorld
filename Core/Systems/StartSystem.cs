@@ -19,7 +19,7 @@ public class StartSystem : NetSystem, IFirstTick {
 			Friction = FP.One
 		});
 		floor.Set(new BoxCollider {
-			HalfExtents = new FVector3(10.ToFP(), 1.ToFP(), 10.ToFP())
+			HalfExtents = new FVector3(20.ToFP(), 1.ToFP(), 20.ToFP())
 		});
 		
 		var enemy = Session.World.CreateEntity();

@@ -13,7 +13,6 @@ public class GameSetup : IGameSetup {
 			.New<PhysicsBroadPhaseSystem>()
 			.New<PhysicsNarrowPhaseSystem>()
 			.New<PhysicsSolveSystem>()
-			.New<MassiveRandom>()
 			.New<StartSystem>()
 			.New<CharacterSpawnSystem>()
 			.New<MovementSystem>()
