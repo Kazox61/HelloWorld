@@ -8,7 +8,7 @@ using Massive.Physics.Components;
 namespace HelloWorld.Core.Systems;
 
 public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
-	private MassiveRandom _massiveRandom;
+	private MassiveRandom _massiveRandom = null!;
 
 	public void Update() {
 		foreach (var (channel, _) in Inputs.GetAllEvents<PlayerConnectedEvent>()) {
@@ -16,7 +16,7 @@ public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
 			player1.Set(new Transform {
 				Position = new FVector3(
 					_massiveRandom.NextInt(-5, 5).ToFP(), 
-					10.ToFP(),
+					2.ToFP(),
 					_massiveRandom.NextInt(-5, 5).ToFP())
 			});
 			player1.Set(new ViewAsset { PackedScenePath = "uid://c5t8fo6tmhs08" });

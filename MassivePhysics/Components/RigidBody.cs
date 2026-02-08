@@ -13,4 +13,6 @@ public struct RigidBody {
 	public FP Friction;
 
 	public bool UseGravity;
+	
+	public bool IsGrounded;
 }

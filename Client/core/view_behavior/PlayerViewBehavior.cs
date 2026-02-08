@@ -30,20 +30,17 @@ public partial class PlayerViewBehavior : ViewBehavior {
 	public override void _Process(double delta) {
 		if (_rigidBodies.Has(_entity.Id)) {
 			var rigidBody = _rigidBodies.Get(_entity.Id);
-		
-			if (rigidBody.Velocity.Y > FP.Half) {
-				_plushSkin.SetState("jump");
-			}
-			else if (rigidBody.Velocity.Y < -FP.Half) {
-				_plushSkin.SetState("fall");
-			}
-			else if (!FP.ApproximatelyEqual(rigidBody.Velocity.X, FP.Zero) || !FP.ApproximatelyEqual(rigidBody.Velocity.Z, FP.Zero)) {
-				_plushSkin.SetState("run");
+
+			if (!rigidBody.IsGrounded) {
+				_plushSkin.SetState(rigidBody.Velocity.Y > FP.Zero ? "jump" : "fall");
 			}
 			else {
-				_plushSkin.SetState("idle");
+				var isRunning = !FP.ApproximatelyEqual(rigidBody.Velocity.X, FP.Zero) ||
+				                !FP.ApproximatelyEqual(rigidBody.Velocity.Z, FP.Zero);
+				_plushSkin.SetState(isRunning ? "run" : "idle");
 			}
 		}
+
 
 		if (_players.Has(_entity.Id)) {
 			var player = _players.Get(_entity.Id);

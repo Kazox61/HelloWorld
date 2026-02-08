@@ -8,11 +8,11 @@ namespace HelloWorld.Core;
 public class GameSetup : IGameSetup {
 	public void SetupGame(MassiveSystems systems, MassiveWorld world, uint seed, int localInputChannel) {
 		systems
-			// .New<PhysicsGravitySystem>()
-			 .New<PhysicsIntegrationSystem>()
-			// .New<PhysicsBroadPhaseSystem>()
-			// .New<PhysicsNarrowPhaseSystem>()
-			// .New<PhysicsSolveSystem>()
+			.New<PhysicsGravitySystem>()
+			.New<PhysicsIntegrationSystem>()
+			.New<PhysicsBroadPhaseSystem>()
+			.New<PhysicsNarrowPhaseSystem>()
+			.New<PhysicsSolveSystem>()
 			.New<MassiveRandom>()
 			.New<StartSystem>()
 			.New<CharacterSpawnSystem>()

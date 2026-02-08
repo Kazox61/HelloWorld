@@ -35,7 +35,21 @@ public class PhysicsSolveSystem : NetSystem, IUpdate {
 
 			var groundDot = 0.7f.ToFP();
 
-			if (normal.Y > groundDot && bA.InverseMass > FP.Zero) {
+			if (normal.Y > groundDot && bB.InverseMass > FP.Zero) {
+				bB.IsGrounded = true;
+
+				if (bB.Velocity.Y < FP.Zero) {
+					bB.Velocity = new FVector3(
+						bB.Velocity.X,
+						FP.Zero,
+						bB.Velocity.Z
+					);
+				}
+			}
+
+			if (normal.Y < -groundDot && bA.InverseMass > FP.Zero) {
+				bA.IsGrounded = true;
+
 				if (bA.Velocity.Y < FP.Zero) {
 					bA.Velocity = new FVector3(
 						bA.Velocity.X,
@@ -45,15 +59,6 @@ public class PhysicsSolveSystem : NetSystem, IUpdate {
 				}
 			}
 
-			if (-normal.Y > groundDot && bB.InverseMass > FP.Zero) {
-				if (bB.Velocity.Y < FP.Zero) {
-					bB.Velocity = new FVector3(
-						bB.Velocity.X,
-						FP.Zero,
-						bB.Velocity.Z
-					);
-				}
-			}
 
 			var rv = bB.Velocity - bA.Velocity;
 				var velAlongNormal = FVector3.Dot(rv, normal);
