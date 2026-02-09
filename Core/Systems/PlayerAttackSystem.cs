@@ -14,7 +14,7 @@ public class PlayerAttackSystem : NetSystem, IUpdate {
 			var playerInput = Inputs.GetInput<PlayerInput>(player.InputChannel).LastFresh();
 			
 			if (playerInput.Attack) {
-				var projectile = World.CreateEntity();
+				var projectile = World.CreateEntity(new Projectile { OwnerEntifier = entity.Entifier });
 				projectile.Set(new Transform {
 					Position = transform.Position + new FVector3(0.ToFP(), 0.5f.ToFP(), 0.ToFP()),
 				});
@@ -32,6 +32,12 @@ public class PlayerAttackSystem : NetSystem, IUpdate {
 					Velocity = direction * 20.ToFP(),
 					InverseMass = 1.ToFP()
 				});
+				
+				projectile.Set(new BoxCollider {
+					HalfExtents = new FVector3(0.25f.ToFP(), 0.25f.ToFP(), 0.25f.ToFP()),
+					IsTrigger = true
+				});
+				
 				projectile.Set(new ViewAsset { PackedScenePath = "uid://dwbbm7cqoaosj" });
 			}
 		});

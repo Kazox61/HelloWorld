@@ -7,6 +7,10 @@ namespace Massive.Physics.Systems;
 
 public class PhysicsNarrowPhaseSystem : NetSystem, IUpdate {
 	public void Update() {
+		World.Include<TriggerEvent>().ForEach(triggerEventEntity => {
+			triggerEventEntity.Destroy();
+		});
+		
 		World.ForEach((Entity pairEntity, ref BroadPhasePair pair) => {
 			ref var colA = ref pair.A.Get<BoxCollider>();
 			ref var colB = ref pair.B.Get<BoxCollider>();
@@ -24,10 +28,20 @@ public class PhysicsNarrowPhaseSystem : NetSystem, IUpdate {
 
 			var collision = EPA.Calculate(gjk.Simplex, colA, colB);
 
+			var isTrigger = colA.IsTrigger || colB.IsTrigger;
+
+			if (isTrigger) {
+				World.Create(new TriggerEvent {
+					EntifierA = pair.A.Entifier,
+					EntifierB = pair.B.Entifier
+				});
+			}
+
 			World.Create(new Contact {
 				EntifierA = pair.A.Entifier,
 				EntifierB = pair.B.Entifier,
-				Collision = collision
+				Collision = collision,
+				IsTrigger = isTrigger
 			});
 
 			pairEntity.Destroy();

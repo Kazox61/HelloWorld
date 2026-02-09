@@ -11,6 +11,11 @@ public class PhysicsSolveSystem : NetSystem, IUpdate {
 
 	public void Update() {
 		World.ForEach((Entity entity, ref Contact contact) => {
+			if (contact.IsTrigger) {
+				entity.Destroy();
+				return;
+			}
+			
 			ref var tA = ref World.Get<Transform>(contact.EntifierA);
 			ref var tB = ref World.Get<Transform>(contact.EntifierB);
 

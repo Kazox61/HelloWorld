@@ -16,6 +16,7 @@ public class GameSetup : IGameSetup {
 			.New<StartSystem>()
 			.New<CharacterSpawnSystem>()
 			.New<MovementSystem>()
-			.New<PlayerAttackSystem>();
+			.New<PlayerAttackSystem>()
+			.New<ProjectileTriggerSystem>();
 	}
 }

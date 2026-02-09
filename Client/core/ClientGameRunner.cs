@@ -39,6 +39,10 @@ public partial class ClientGameRunner : Node {
 		Client.Connection.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1987));
 	}
 
+	public override void _ExitTree() {
+		GodotEntitySynchronization.UnsubscribeViews();
+	}
+
 	public override void _PhysicsProcess(double delta) {
 		ClientTime += (float)delta;
 
