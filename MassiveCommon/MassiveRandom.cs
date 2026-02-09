@@ -4,7 +4,6 @@ namespace Massive.Common;
 
 public class MassiveRandom : WorldSystem<uint>, IInjectSelf<MassiveRandom> {
 	public MassiveRandom(uint seed = 1) : base(seed) { }
-	public MassiveRandom() { }
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public int NextInt() {

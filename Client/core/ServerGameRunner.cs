@@ -13,7 +13,7 @@ public partial class ServerGameRunner : Node {
 		Server = new Server(new SessionConfig(), new TcpConnectionsListener(1987));
 		Server.InputIdentifiers.RegisterAutomaticallyFromAllAssemblies();
 
-		new GameSetup().SetupGame(Server.Session.Systems, Server.Session.World, 0, 0);
+		new GameSetup().SetupGame(Server.Session.Systems, Server.Session.World, 33);
 		
 		Server.Session.Systems.Build(Server.Session);
 

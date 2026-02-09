@@ -23,7 +23,7 @@ public partial class ClientGameRunner : Node {
 
 		GameSetup = new GameSetup();
 
-		GameSetup.SetupGame(Session.Systems, Session.World, 0, 0);
+		GameSetup.SetupGame(Session.Systems, Session.World, 0);
 
 		Session.Systems.Build(Session);
 

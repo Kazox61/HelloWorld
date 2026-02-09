@@ -6,13 +6,14 @@ using Massive.Physics.Systems;
 namespace HelloWorld.Core;
 
 public class GameSetup : IGameSetup {
-	public void SetupGame(MassiveSystems systems, MassiveWorld world, uint seed, int localInputChannel) {
+	public void SetupGame(MassiveSystems systems, MassiveWorld world, uint seed) {
 		systems
 			.New<PhysicsGravitySystem>()
 			.New<PhysicsIntegrationSystem>()
 			.New<PhysicsBroadPhaseSystem>()
 			.New<PhysicsNarrowPhaseSystem>()
 			.New<PhysicsSolveSystem>()
+			.New(() => new MassiveRandom(seed))
 			.New<StartSystem>()
 			.New<CharacterSpawnSystem>()
 			.New<MovementSystem>()
