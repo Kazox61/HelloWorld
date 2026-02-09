@@ -14,10 +14,12 @@ public class PhysicsNarrowPhaseSystem : NetSystem, IUpdate {
 		World.ForEach((Entity pairEntity, ref BroadPhasePair pair) => {
 			ref var colA = ref pair.A.Get<BoxCollider>();
 			ref var colB = ref pair.B.Get<BoxCollider>();
+			ref var transformA = ref pair.A.Get<Transform>();
+			ref var transformB = ref pair.B.Get<Transform>();
 
 			// update collider centres
-			colA.Center = pair.A.Get<Transform>().Position;
-			colB.Center = pair.B.Get<Transform>().Position;
+			colA.Center = transformA.Position;
+			colB.Center = transformB.Position;
 
 			var gjk = GJK.Calculate(colA, colB);
 

@@ -17,7 +17,7 @@ public class EntityViewSynchronizer {
 		foreach (var id in _viewInstances) {
 			var viewInstance = _viewInstances.Get(id);
 
-			if (!viewAssets.Has(id) || viewAssets.Get(id).PackedScenePath != viewInstance.Asset.PackedScenePath) {
+			if (!viewAssets.Has(id) || viewAssets.Get(id).PackedScenePath.CompareTo(viewInstance.Asset.PackedScenePath) != 0) {
 				RemoveViewInstance(id, viewInstance);
 			}
 		}

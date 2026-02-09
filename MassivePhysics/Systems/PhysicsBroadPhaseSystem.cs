@@ -7,15 +7,16 @@ namespace Massive.Physics.Systems;
 
 public class PhysicsBroadPhaseSystem : NetSystem, IUpdate {
 	public void Update() {
-		var entities = new List<Entity>();
-		World.ForEach((Entity entity, ref Transform _, ref BoxCollider _) => {
-			entities.Add(entity);
-		});
+		var entities = new List<int>();
+		var query = World.Include<Transform, BoxCollider>();
+		foreach (var entityId in query) {
+			entities.Add(entityId);
+		}
 
 		for (var i = 0; i < entities.Count; i++) {
 			for (var j = i + 1; j < entities.Count; j++) {
-				var a = entities[i];
-				var b = entities[j];
+				var a = World.GetEntity(entities[i]);
+				var b = World.GetEntity(entities[j]);
 
 				ref var ta = ref a.Get<Transform>();
 				ref var tb = ref b.Get<Transform>();

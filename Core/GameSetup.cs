@@ -16,6 +16,7 @@ public class GameSetup : IGameSetup {
 			.New(() => new MassiveRandom(seed))
 			.New<StartSystem>()
 			.New<CharacterSpawnSystem>()
+			.New<CharacterDespawnSystem>()
 			.New<MovementSystem>()
 			.New<PlayerAttackSystem>()
 			.New<ProjectileTriggerSystem>();
