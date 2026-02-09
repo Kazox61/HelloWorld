@@ -37,6 +37,9 @@ namespace Fixed64
 	{
 		private static FP Tolerance => FP.CalculationsEpsilon;
 		private static FP NormalBias => FP.CalculationsEpsilonSqr;
+		private static FP FaceEpsilon => FP.CalculationsEpsilon * 10.ToFP();
+		private static FP FaceEpsilonSqr => FaceEpsilon * FaceEpsilon;
+
 
 		public static List<MinkowskiDifference> Vertices { get; } = new List<MinkowskiDifference>();
 		public static List<PolytopeFace> Faces { get; } = new List<PolytopeFace>();
@@ -195,19 +198,10 @@ namespace Fixed64
 			var c = Vertices.Count - 1;
 			foreach (var (a, b) in LooseEdges)
 			{
-				var vA = Vertices[a].Difference;
-				var vB = Vertices[b].Difference;
-				var vC = Vertices[c].Difference;
-
-				var face = new PolytopeFace(a, b, c, FVector3.Normalize(FVector3.Cross(vA - vB, vA - vC)));
-
-				if (FVector3.Dot(vA, face.Normal) < -NormalBias)
+				if (TryCreateFace(a, b, c, out var face))
 				{
-					(face.A, face.B) = (face.B, face.A);
-					face.Normal = -face.Normal;
+					Faces.Add(face);
 				}
-
-				Faces.Add(face);
 			}
 		}
 
@@ -263,6 +257,33 @@ namespace Fixed64
 			{
 				edges.Add(edge);
 			}
+		}
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private static bool TryCreateFace(int a, int b, int c, out PolytopeFace face)
+		{
+			var vA = Vertices[a].Difference;
+			var vB = Vertices[b].Difference;
+			var vC = Vertices[c].Difference;
+
+			var normal = FVector3.Cross(vB - vA, vC - vA);
+			var lenSqr = FVector3.LengthSqr(normal);
+
+			if (lenSqr <= FaceEpsilonSqr)
+			{
+				face = default;
+				return false; // Degenerate
+			}
+
+			normal /= FP.Sqrt(lenSqr);
+
+			if (FVector3.Dot(vA, normal) < FP.Zero) 
+			{
+				normal = -normal;
+			}
+
+			face = new PolytopeFace(a, b, c, normal);
+			return true;
 		}
 	}
 }
