@@ -1,6 +1,5 @@
 ﻿using HelloWorld.Core.Components;
 using Massive;
-using Massive.Common;
 using Massive.Netcode;
 using Massive.Physics.Components;
 
@@ -8,7 +7,7 @@ namespace HelloWorld.Core.Systems;
 
 public class ProjectileTriggerSystem : NetSystem, IUpdate {
 	public void Update() {
-		World.ForEach((Entity entity, ref TriggerEvent triggerEvent) => {
+		World.ForEach((ref TriggerEvent triggerEvent) => {
 			var entityA = triggerEvent.EntifierA.In(World);
 			var entityB = triggerEvent.EntifierB.In(World);
 			

@@ -33,7 +33,7 @@ public class MovementSystem : NetSystem, IUpdate {
 				);
 			}
 
-			if (playerInput.Jump && input.IsFresh() && rigidBody.IsGrounded) {
+			if (playerInput.Jump && input.IsFresh && rigidBody.IsGrounded) {
 				rigidBody.Velocity += new FVector3(
 					FP.Zero,
 					10.ToFP(),
