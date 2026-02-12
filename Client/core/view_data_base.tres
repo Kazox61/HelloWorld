@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://cuic0rbwtf1uv"]
+
+[ext_resource type="Script" uid="uid://dgb4u5ev1t2tw" path="res://addons/massive-godot-integration/view_synchronizer/ViewDataBase.cs" id="1_81nct"]
+[ext_resource type="PackedScene" uid="uid://c5t8fo6tmhs08" path="res://core/player.tscn" id="1_aclud"]
+[ext_resource type="PackedScene" uid="uid://bjho6cn00y83" path="res://core/enemy.tscn" id="2_xtg3i"]
+[ext_resource type="PackedScene" uid="uid://dwbbm7cqoaosj" path="res://core/projectile.tscn" id="3_oygeb"]
+
+[resource]
+script = ExtResource("1_81nct")
+ViewPrefabs = Dictionary[int, PackedScene]({
+1: ExtResource("1_aclud"),
+2: ExtResource("2_xtg3i"),
+3: ExtResource("3_oygeb")
+})

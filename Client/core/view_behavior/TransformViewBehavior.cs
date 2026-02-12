@@ -1,22 +1,22 @@
 ﻿using Fixed64;
 using Godot;
+using HelloWorld.addons.massive_godot_integration.view_synchronizer;
 using Massive;
 using Massive.Common;
-using massivegodotintegration.addons.massive_godot_integration.synchronizer;
 
 namespace HelloWorld.Client.Core;
 
 [GlobalClass]
-public partial class TransformViewBehavior : ViewBehavior {
+public partial class TransformViewBehavior : EntityBehaviour {
 	[Export] private Node3D _targetNodePosition;
 	[Export] private Node3D _targetNodeRotation;
 
 	private DataSet<Transform> _transforms;
 	private Entity _entity;
 	
-	public override void OnEntityAssigned(World world, Entity entity) {
+	public override void OnEntityAssigned(Entity entity) {
 		_entity = entity;
-		_transforms = world.DataSet<Transform>();
+		_transforms = _entity.World.DataSet<Transform>();
 	}
 	public override void OnEntityRemoved() {
 		_transforms = null;

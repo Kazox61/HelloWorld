@@ -1,14 +1,14 @@
 ﻿using Fixed64;
 using Godot;
+using HelloWorld.addons.massive_godot_integration.view_synchronizer;
 using HelloWorld.Client.core;
 using HelloWorld.Core.Components;
 using Massive;
 using Massive.Physics.Components;
-using massivegodotintegration.addons.massive_godot_integration.synchronizer;
 
 namespace HelloWorld.Client.Core;
 
-public partial class PlayerViewBehavior : ViewBehavior {
+public partial class PlayerViewBehavior : EntityBehaviour {
 	[Export] private GodotPlushSkin _plushSkin;
 	[Export] private Camera3D _camera;
 	
@@ -16,10 +16,10 @@ public partial class PlayerViewBehavior : ViewBehavior {
 	private DataSet<Player> _players;
 	private Entity _entity;
 	
-	public override void OnEntityAssigned(World world, Entity entity) {
+	public override void OnEntityAssigned(Entity entity) {
 		_entity = entity;
-		_rigidBodies = world.DataSet<RigidBody>();
-		_players = world.DataSet<Player>();
+		_rigidBodies = _entity.World.DataSet<RigidBody>();
+		_players = _entity.World.DataSet<Player>();
 	}
 	public override void OnEntityRemoved() {
 		_rigidBodies = null;

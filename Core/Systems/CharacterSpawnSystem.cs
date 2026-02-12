@@ -4,6 +4,7 @@ using Massive;
 using Massive.Common;
 using Massive.Netcode;
 using Massive.Physics.Components;
+using Massive.QoL;
 
 namespace HelloWorld.Core.Systems;
 
@@ -20,7 +21,7 @@ public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
 					_massiveRandom.NextInt(-5, 5).ToFP()
 				)
 			});
-			player1.Set(new ViewAsset { PackedScenePath = "uid://c5t8fo6tmhs08" });
+			player1.Set(new ViewAsset(1));
 			player1.Set(new RigidBody {
 				Velocity = FVector3.Zero,
 				InverseMass = FP.One,

@@ -1,15 +1,15 @@
 ﻿using System.Net;
 using Godot;
+using HelloWorld.addons.massive_godot_integration.view_synchronizer;
 using HelloWorld.Core;
 using HelloWorld.Core.Input;
 using Massive.Common;
 using Massive.Netcode;
-using massivegodotintegration.addons.massive_godot_integration.synchronizer;
 
 namespace HelloWorld.Client.core;
 
 public partial class ClientGameRunner : Node {
-	public GodotEntitySynchronization GodotEntitySynchronization;
+	public GodotViewSynchronizer GodotViewSynchronizer;
 	public Massive.Netcode.Client Client;
 	public float ClientTime;
 	public IGameSetup GameSetup;
@@ -18,6 +18,8 @@ public partial class ClientGameRunner : Node {
 	public static int LocalPlayerChannel;
 
 	public override void _EnterTree() {
+		GodotViewSynchronizer = new GodotViewSynchronizer();
+		
 		Client = new Massive.Netcode.Client(new SessionConfig(), new TcpConnection());
 		Client.InputIdentifiers.RegisterAutomaticallyFromAllAssemblies();
 
@@ -32,15 +34,8 @@ public partial class ClientGameRunner : Node {
 		Session.Simulations.Add(basicSimulation);
 
 		// basicSimulation.Initialize();
-		
-		GodotEntitySynchronization = new GodotEntitySynchronization(Session.World);
-		GodotEntitySynchronization.SubscribeViews();
 
 		Client.Connection.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1987));
-	}
-
-	public override void _ExitTree() {
-		GodotEntitySynchronization.UnsubscribeViews();
 	}
 
 	public override void _PhysicsProcess(double delta) {
@@ -56,7 +51,8 @@ public partial class ClientGameRunner : Node {
 
 		Client.Update(ClientTime);
 		LocalPlayerChannel = Client.Connection.Channel;
-		GodotEntitySynchronization?.SynchronizeViews();
+		
+		GodotViewSynchronizer.SynchronizeAll(Session.World);
 	}
 	
 	private PlayerInput CollectInput() {

@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://c5t8fo6tmhs08"]
 
-[ext_resource type="Script" uid="uid://qaaedlnqhv7q" path="res://addons/massive-godot-integration/synchronizer/EntityView3d.cs" id="1_43feq"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://core/resources/godot_plush/godot_plush_skin.tscn" id="1_vjlsr"]
+[ext_resource type="Script" uid="uid://q20lhqtox0l3" path="res://addons/massive-godot-integration/view_synchronizer/EntityView.cs" id="1_y0177"]
 [ext_resource type="Script" uid="uid://cd1hxdoxapn8g" path="res://core/view_behavior/TransformViewBehavior.cs" id="3_7dqni"]
 [ext_resource type="Script" uid="uid://cje7a1nri72ep" path="res://core/view_behavior/PlayerViewBehavior.cs" id="4_43feq"]
 
-[node name="Player" type="Node3D" unique_id=324689971 node_paths=PackedStringArray("_viewBehaviors")]
-script = ExtResource("1_43feq")
-_viewBehaviors = [NodePath("TransformViewBehavior"), NodePath("PlayerViewBehavior")]
+[node name="Player" type="Node3D" unique_id=324689971 node_paths=PackedStringArray("_entityBehaviours")]
+script = ExtResource("1_y0177")
+_entityBehaviours = [NodePath("TransformViewBehavior"), NodePath("PlayerViewBehavior")]
 
 [node name="GodotPlushSkin" parent="." unique_id=1916972161 instance=ExtResource("1_vjlsr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)

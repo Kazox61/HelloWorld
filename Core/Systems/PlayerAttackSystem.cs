@@ -5,6 +5,7 @@ using Massive;
 using Massive.Common;
 using Massive.Netcode;
 using Massive.Physics.Components;
+using Massive.QoL;
 
 namespace HelloWorld.Core.Systems;
 
@@ -38,7 +39,7 @@ public class PlayerAttackSystem : NetSystem, IUpdate {
 					IsTrigger = true
 				});
 				
-				projectile.Set(new ViewAsset { PackedScenePath = "uid://dwbbm7cqoaosj" });
+				projectile.Set(new ViewAsset(3));
 			}
 		});
 	}

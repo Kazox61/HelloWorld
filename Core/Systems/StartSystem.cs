@@ -4,6 +4,7 @@ using Massive;
 using Massive.Common;
 using Massive.Netcode;
 using Massive.Physics.Components;
+using Massive.QoL;
 
 namespace HelloWorld.Core.Systems;
 
@@ -24,7 +25,7 @@ public class StartSystem : NetSystem, IFirstTick {
 		
 		var enemy = Session.World.CreateEntity(new Enemy());
 		enemy.Set(new Transform { Position = new FVector3(FP.Zero, 1.ToFP(), FP.Zero) });
-		enemy.Set(new ViewAsset { PackedScenePath = "uid://bjho6cn00y83" });
+		enemy.Set(new ViewAsset(2));
 		enemy.Set(new RigidBody {
 			Velocity = FVector3.Zero,
 			InverseMass = FP.Zero,
