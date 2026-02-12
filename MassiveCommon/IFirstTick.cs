@@ -1,9 +1,0 @@
-﻿using Massive;
-
-namespace Massive.Common;
-
-public interface IFirstTick : ISystemMethod<IFirstTick> {
-	void FirstTick();
-	
-	void ISystemMethod<IFirstTick>.Run() => FirstTick();
-}

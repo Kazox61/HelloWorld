@@ -14,15 +14,15 @@ public partial class ServerGameRunner : Node {
 		Server.InputIdentifiers.RegisterAutomaticallyFromAllAssemblies();
 
 		new GameSetup().SetupGame(Server.Session.Systems, Server.Session.World, 33);
-		
+
 		Server.Session.Systems.Build(Server.Session);
 
-		var systemsSimulation = new SystemsSimulation(Server.Session.Systems);
-    
-		Server.Session.Simulations.Add(systemsSimulation);
-    
-		systemsSimulation.Initialize();
-    
+		var basicSimulation = new BasicSimulation(Server.Session.Systems);
+
+		Server.Session.Simulations.Add(basicSimulation);
+
+		// basicSimulation.Initialize();
+
 		Server.ConnectionListener.Start();
 	}
 

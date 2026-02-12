@@ -3,12 +3,15 @@ using Unity.IL2CPP.CompilerServices;
 
 namespace Massive.Netcode
 {
+	/// <summary>
+	/// Returns filled indices.
+	/// </summary>
 	[Il2CppSetOption(Option.NullChecks, false)]
 	[Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-	public struct LocalOrdersEnumerator
+	public struct MaskEnumerator
 	{
-		private ulong[] _allBits;
-		private int _allBitsLength;
+		private readonly ulong[] _allBits;
+		private readonly int _allBitsLength;
 		private int _bitsIndex;
 
 		private readonly byte[] _deBruijn;
@@ -17,7 +20,7 @@ namespace Massive.Netcode
 		private int _bitsOffset;
 		private int _bit;
 
-		public LocalOrdersEnumerator(ulong[] mask, int maskLength)
+		public MaskEnumerator(ulong[] mask, int maskLength)
 		{
 			_allBitsLength = maskLength;
 			_allBits = mask;
@@ -71,7 +74,7 @@ namespace Massive.Netcode
 			return false;
 		}
 
-		public LocalOrdersEnumerator GetEnumerator()
+		public MaskEnumerator GetEnumerator()
 		{
 			return this;
 		}

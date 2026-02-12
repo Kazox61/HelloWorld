@@ -51,7 +51,7 @@ namespace Massive.Netcode
 				{
 					Connections.RemoveAt(i);
 					ConnectionListener.ReturnToPool(connection);
-					Session.Inputs.AppendActualEventAt(Session.Loop.CurrentTick, connection.Channel, new PlayerDisconnectedEvent());
+					Session.Inputs.AppendApprovedEventAt(Session.Loop.CurrentTick, connection.Channel, new PlayerDisconnectedEvent());
 				}
 			}
 
@@ -59,7 +59,7 @@ namespace Massive.Netcode
 			{
 				connection.Channel = UsedChannels++;
 				Connections.Add(connection);
-				Session.Inputs.AppendActualEventAt(Session.Loop.CurrentTick, connection.Channel, new PlayerConnectedEvent());
+				Session.Inputs.AppendApprovedEventAt(Session.Loop.CurrentTick, connection.Channel, new PlayerConnectedEvent());
 				NewConnections.Add(connection);
 			}
 
@@ -120,8 +120,7 @@ namespace Massive.Netcode
 				{
 					var messageId = MessageSerializer.ReadMessageId(connection.Incoming);
 
-					if (!(messageId == (int)MessageType.Ping
-						|| messageId >= (int)MessageType.Count && InputIdentifiers.IsRegistered(messageId)))
+					if (!IsAppropriateClientMessage(messageId))
 					{
 						connection.Disconnect();
 						break;
@@ -175,6 +174,21 @@ namespace Massive.Netcode
 					connection.Disconnect();
 				}
 			}
+		}
+
+		private bool IsAppropriateClientMessage(int messageId)
+		{
+			if (messageId == (int)MessageType.Ping)
+			{
+				return true;
+			}
+
+			if (InputIdentifiers.IsRegistered(messageId) && !InputIdentifiers.IsAuthoritive(messageId))
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		private void SendFullSync(Connection connection)

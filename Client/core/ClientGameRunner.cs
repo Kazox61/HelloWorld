@@ -27,11 +27,11 @@ public partial class ClientGameRunner : Node {
 
 		Session.Systems.Build(Session);
 
-		var systemsSimulation = new SystemsSimulation(Session.Systems);
+		var basicSimulation = new BasicSimulation(Session.Systems);
 
-		Session.Simulations.Add(systemsSimulation);
+		Session.Simulations.Add(basicSimulation);
 
-		systemsSimulation.Initialize();
+		// basicSimulation.Initialize();
 		
 		GodotEntitySynchronization = new GodotEntitySynchronization(Session.World);
 		GodotEntitySynchronization.SubscribeViews();

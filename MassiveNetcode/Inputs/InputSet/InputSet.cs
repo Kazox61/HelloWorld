@@ -24,7 +24,7 @@ namespace Massive.Netcode
 			Serializer = serializer ?? new UnmanagedInputSerializer<T>();
 			InputType = typeof(T);
 			DataSize = Serializer.DataSize;
-			InputSize = Serializer.InputSize;
+			FullInputSize = Serializer.FullInputSize;
 		}
 
 		public IInputSerializer<T> Serializer { get; }
@@ -33,7 +33,7 @@ namespace Massive.Netcode
 
 		public int DataSize { get; }
 
-		public int InputSize { get; }
+		public int FullInputSize { get; }
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public AllInputs<T> GetInputs(int tick)
@@ -42,11 +42,11 @@ namespace Massive.Netcode
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public void SetActual(int tick, int channel, T input)
+		public void SetApproved(int tick, int channel, T input)
 		{
 			PopulateUpTo(tick);
 
-			_inputs[tick].SetActual(channel, input);
+			_inputs[tick].SetApproved(channel, input);
 
 			_localChangeTracker.NotifyChange(tick);
 			_globalChangeTracker.NotifyChange(tick);
@@ -73,12 +73,6 @@ namespace Massive.Netcode
 
 			_localChangeTracker.NotifyChange(tick);
 			_globalChangeTracker.NotifyChange(tick);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public void ClearPrediction(int tick)
-		{
-			ClearPrediction(tick, tick);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -145,36 +139,33 @@ namespace Massive.Netcode
 			_localChangeTracker.ConfirmChangesUpTo(_inputs.TailIndex);
 		}
 
-		public void ReadData(int tick, int channel, Stream stream)
+		public void ReadApproved(int tick, int channel, Stream stream)
 		{
 			PopulateUpTo(tick);
 
-			_inputs[tick].SetActual(channel, Serializer.ReadData(stream));
+			_inputs[tick].SetApproved(channel, Serializer.Read(stream));
 		}
 
-		public void ReadInput(int tick, int channel, Stream stream)
+		public void ReadFullInput(int tick, int channel, Stream stream)
 		{
 			PopulateUpTo(tick);
 
-			ref var inputs = ref _inputs[tick];
-
-			inputs.EnsureChannel(channel);
-			inputs.Inputs[channel] = Serializer.ReadInput(stream);
+			_inputs[tick].SetFullInput(channel, Serializer.ReadFullInput(stream));
 		}
 
-		public void WriteData(int tick, int channel, Stream stream)
+		public void Write(int tick, int channel, Stream stream)
 		{
-			Serializer.WriteData(_inputs[tick].Get(channel).LastFreshInput, stream);
+			Serializer.Write(_inputs[tick].Get(channel).LastFreshInput, stream);
 		}
 
-		public void WriteInput(int tick, int channel, Stream stream)
+		public void WriteFullInput(int tick, int channel, Stream stream)
 		{
-			Serializer.WriteInput(_inputs[tick].Inputs[channel], stream);
+			Serializer.WriteFullInput(_inputs[tick].Inputs[channel], stream);
 		}
 
-		public void SkipData(Stream stream)
+		public void Skip(Stream stream)
 		{
-			Serializer.ReadData(stream);
+			Serializer.Read(stream);
 		}
 
 		public int GetUsedChannels(int tick)
@@ -182,9 +173,19 @@ namespace Massive.Netcode
 			return _inputs[tick].UsedChannels;
 		}
 
+		public int GetFreshInputsCount(int tick)
+		{
+			return _inputs[tick].FreshInputsCount();
+		}
+
 		public bool IsFresh(int tick, int channel)
 		{
-			return _inputs[tick].Inputs[channel].IsFresh();
+			return _inputs[tick].Inputs[channel].IsFresh;
+		}
+
+		public MaskEnumerator GetFreshInputs(int tick)
+		{
+			return _inputs[tick].GetFreshInputs();
 		}
 	}
 }

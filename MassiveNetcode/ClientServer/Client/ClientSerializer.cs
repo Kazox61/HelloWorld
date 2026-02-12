@@ -56,12 +56,12 @@ namespace Massive.Netcode
 		{
 			if (_inputIdentifiers.IsEvent(messageId))
 			{
-				var localOrder = stream.ReadShort();
-				GetEventSet(messageId).ReadData(tick, localOrder, channel, stream);
+				var order = stream.ReadShort();
+				GetEventSet(messageId).ReadApproved(tick, order, channel, stream);
 			}
 			else
 			{
-				GetInputSet(messageId).ReadData(tick, channel, stream);
+				GetInputSet(messageId).ReadApproved(tick, channel, stream);
 			}
 		}
 
@@ -70,11 +70,11 @@ namespace Massive.Netcode
 			if (_inputIdentifiers.IsEvent(messageId))
 			{
 				stream.ReadShort();
-				GetEventSet(messageId).SkipData(stream);
+				GetEventSet(messageId).Skip(stream);
 			}
 			else
 			{
-				GetInputSet(messageId).SkipData(stream);
+				GetInputSet(messageId).Skip(stream);
 			}
 		}
 
@@ -91,9 +91,9 @@ namespace Massive.Netcode
 
 				for (var j = 0; j < eventsCount; j++)
 				{
-					var localOrder = stream.ReadShort();
+					var order = stream.ReadShort();
 					var channel = stream.ReadShort();
-					eventSet.ReadData(tick, localOrder, channel, stream);
+					eventSet.ReadApproved(tick, order, channel, stream);
 				}
 			}
 
@@ -108,21 +108,21 @@ namespace Massive.Netcode
 
 				for (var channel = 0; channel < usedChannels; channel++)
 				{
-					inputsSet.ReadInput(tick, channel, stream);
+					inputsSet.ReadFullInput(tick, channel, stream);
 				}
 			}
 		}
 
-		public void WriteOneInput(IEventSet eventSet, int tick, int localOrder, Stream stream)
+		public void WriteOneInput(IEventSet eventSet, int tick, int order, Stream stream)
 		{
 			var messageId = _inputIdentifiers.GetEventId(eventSet.EventType);
 
 			WriteMessageId(messageId, stream);
 			stream.WriteInt(tick);
-			eventSet.WriteData(tick, localOrder, stream);
+			eventSet.Write(tick, order, stream);
 
 			// Don't writing channel because server already knows it.
-			// Don't writing localOrder because server will append this event and use its own ordering.
+			// Don't writing order because server will append this event and use its own ordering.
 		}
 
 		public void WriteOneInput(IInputSet inputSet, int tick, int channel, Stream stream)
@@ -131,7 +131,7 @@ namespace Massive.Netcode
 
 			WriteMessageId(messageId, stream);
 			stream.WriteInt(tick);
-			inputSet.WriteData(tick, channel, stream);
+			inputSet.Write(tick, channel, stream);
 
 			// Don't writing channel because server already knows it.
 		}

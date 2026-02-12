@@ -13,6 +13,7 @@
       <ProjectReference Include="..\MassiveEcs\MassiveEcs.csproj" />
       <ProjectReference Include="..\MassiveNetcode\MassiveNetcode.csproj" />
       <ProjectReference Include="..\MassivePhysics\MassivePhysics.csproj" />
+      <ProjectReference Include="..\MassiveQol\MassiveQol.csproj" />
     </ItemGroup>
 
     <ItemGroup>
