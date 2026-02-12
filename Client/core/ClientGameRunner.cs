@@ -57,13 +57,11 @@ public partial class ClientGameRunner : Node {
 	
 	private PlayerInput CollectInput() {
 		var inputDirection = Input.GetVector("move_left", "move_right", "move_forward", "move_back").Normalized();
-		var kill = Input.IsActionJustPressed("ui_cancel");
 		var jump = Input.IsActionJustPressed("jump");
 		var attack = Input.IsActionJustPressed("shoot");
 		return new PlayerInput {
 			DirectionX = inputDirection.X,
 			DirectionY = inputDirection.Y,
-			Kill = kill,
 			Jump = jump,
 			Attack = attack
 		};

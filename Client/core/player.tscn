@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://q20lhqtox0l3" path="res://addons/massive-godot-integration/view_synchronizer/EntityView.cs" id="1_y0177"]
 [ext_resource type="Script" uid="uid://cd1hxdoxapn8g" path="res://core/view_behavior/TransformViewBehavior.cs" id="3_7dqni"]
 [ext_resource type="Script" uid="uid://cje7a1nri72ep" path="res://core/view_behavior/PlayerViewBehavior.cs" id="4_43feq"]
+[ext_resource type="Script" uid="uid://b3j5aptjxwdgm" path="res://core/view_behavior/BoxColliderBehavior.cs" id="5_20ww2"]
 
 [node name="Player" type="Node3D" unique_id=324689971 node_paths=PackedStringArray("_entityBehaviours")]
 script = ExtResource("1_y0177")
-_entityBehaviours = [NodePath("TransformViewBehavior"), NodePath("PlayerViewBehavior")]
+_entityBehaviours = [NodePath("TransformViewBehavior"), NodePath("PlayerViewBehavior"), NodePath("BoxColliderBehavior")]
 
 [node name="GodotPlushSkin" parent="." unique_id=1916972161 instance=ExtResource("1_vjlsr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
@@ -21,6 +22,9 @@ _targetNodeRotation = NodePath("../GodotPlushSkin")
 script = ExtResource("4_43feq")
 _plushSkin = NodePath("../GodotPlushSkin")
 _camera = NodePath("../Camera")
+
+[node name="BoxColliderBehavior" type="Node" parent="." unique_id=152894813]
+script = ExtResource("5_20ww2")
 
 [node name="Camera" type="Camera3D" parent="." unique_id=1951030475]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 8, 8)

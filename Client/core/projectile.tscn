@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://q20lhqtox0l3" path="res://addons/massive-godot-integration/view_synchronizer/EntityView.cs" id="1_1pbr4"]
 [ext_resource type="Script" uid="uid://cd1hxdoxapn8g" path="res://core/view_behavior/TransformViewBehavior.cs" id="2_wahqi"]
+[ext_resource type="Script" uid="uid://b3j5aptjxwdgm" path="res://core/view_behavior/BoxColliderBehavior.cs" id="3_qgljb"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_31qdj"]
 radius = 0.2
@@ -14,9 +15,12 @@ albedo_color = Color(0.29803923, 0.5254902, 1, 1)
 mesh = SubResource("SphereMesh_31qdj")
 surface_material_override/0 = SubResource("StandardMaterial3D_31qdj")
 script = ExtResource("1_1pbr4")
-_entityBehaviours = [NodePath("TransformViewBehavior")]
+_entityBehaviours = [NodePath("TransformViewBehavior"), NodePath("BoxColliderBehavior")]
 
 [node name="TransformViewBehavior" type="Node" parent="." unique_id=823922719 node_paths=PackedStringArray("_targetNodePosition", "_targetNodeRotation")]
 script = ExtResource("2_wahqi")
 _targetNodePosition = NodePath("..")
 _targetNodeRotation = NodePath("..")
+
+[node name="BoxColliderBehavior" type="Node" parent="." unique_id=1743946509]
+script = ExtResource("3_qgljb")

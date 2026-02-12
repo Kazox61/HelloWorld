@@ -6,7 +6,7 @@ using Massive.Physics.Components;
 namespace Massive.Physics.Systems;
 
 public class PhysicsSystem : NetSystem, IUpdate {
-	private readonly FVector3 _gravity = new(FP.Zero, (-20).ToFP(), FP.Zero); 
+	private readonly FVector3 _gravity = new(FP.Zero, (-40).ToFP(), FP.Zero); 
 	private readonly FP _slop = 0.01f.ToFP();
 	private readonly FP _percent = 0.8f.ToFP();
 	
