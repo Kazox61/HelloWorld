@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cd1hxdoxapn8g" path="res://core/view_behavior/TransformViewBehavior.cs" id="3_7dqni"]
 [ext_resource type="Script" uid="uid://cje7a1nri72ep" path="res://core/view_behavior/PlayerViewBehavior.cs" id="4_43feq"]
 [ext_resource type="Script" uid="uid://b3j5aptjxwdgm" path="res://core/view_behavior/BoxColliderBehavior.cs" id="5_20ww2"]
+[ext_resource type="Script" uid="uid://dwmfcsxnpawux" path="res://core/WorldPositionUpdater.cs" id="6_liwyg"]
 
 [node name="Player" type="Node3D" unique_id=324689971 node_paths=PackedStringArray("_entityBehaviours")]
 script = ExtResource("1_y0177")
@@ -18,13 +19,27 @@ script = ExtResource("3_7dqni")
 _targetNodePosition = NodePath("..")
 _targetNodeRotation = NodePath("../GodotPlushSkin")
 
-[node name="PlayerViewBehavior" type="Node" parent="." unique_id=726075329 node_paths=PackedStringArray("_plushSkin", "_camera")]
+[node name="PlayerViewBehavior" type="Node" parent="." unique_id=726075329 node_paths=PackedStringArray("_plushSkin", "_camera", "_debugLabel")]
 script = ExtResource("4_43feq")
 _plushSkin = NodePath("../GodotPlushSkin")
 _camera = NodePath("../Camera")
+_debugLabel = NodePath("../DebugLabel")
 
 [node name="BoxColliderBehavior" type="Node" parent="." unique_id=152894813]
 script = ExtResource("5_20ww2")
 
 [node name="Camera" type="Camera3D" parent="." unique_id=1951030475]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 8, 8)
+
+[node name="LabelMarker" type="Marker3D" parent="." unique_id=1577666844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="DebugLabel" type="Label" parent="." unique_id=1966770596]
+offset_right = 41.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 20
+text = "Test"
+
+[node name="WorldPositionUpdater" type="Node" parent="DebugLabel" unique_id=1481121986 node_paths=PackedStringArray("_anchor")]
+script = ExtResource("6_liwyg")
+_anchor = NodePath("../../LabelMarker")

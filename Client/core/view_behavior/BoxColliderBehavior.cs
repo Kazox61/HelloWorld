@@ -6,6 +6,7 @@ using Massive.Physics.Components;
 
 namespace HelloWorld.Client.Core;
 
+[GlobalClass]
 public partial class BoxColliderBehavior : EntityBehaviour {
 	private DataSet<BoxCollider> _boxColliders;
 	private Entity _entity;

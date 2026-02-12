@@ -15,6 +15,6 @@ public class EntityViewFactory : IViewFactory<EntityView> {
 	}
 
 	public void DestroyView(EntityView view) {
-		view.Free();
+		view.QueueFree();
 	}
 }

@@ -35,6 +35,6 @@ public class StartSystem : NetSystem, IFirstTick {
 		enemy.Set(new BoxCollider {
 			HalfExtents = new FVector3(0.5f.ToFP(), 1f.ToFP(), 0.5f.ToFP())
 		});
-		enemy.Set(new Health { Value = 1 });
+		enemy.Set(new Health { Value = 1, MaxValue = 1 });
 	}
 }

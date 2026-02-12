@@ -32,7 +32,7 @@ public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
 			player.Set(new BoxCollider {
 				HalfExtents = new FVector3(0.5f.ToFP(), 0.8f.ToFP(), 0.5f.ToFP())
 			});
-			player.Set(new Health { Value = 1 });
+			player.Set(new Health { Value = 1, MaxValue = 1 });
 		}
 	}
 
