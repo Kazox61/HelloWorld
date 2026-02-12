@@ -11,17 +11,25 @@ public class ProjectileTriggerSystem : NetSystem, IUpdate {
 			var entityA = triggerEvent.EntifierA.In(World);
 			var entityB = triggerEvent.EntifierB.In(World);
 			
-			if (entityA.Has<Projectile>() && entityB.Has<Player>()) {
+			if (entityA.Has<Projectile>() && entityB.Has<Health>()) {
 				var projectile = entityA.Get<Projectile>();
 				if (projectile.OwnerEntifier != triggerEvent.EntifierB) {
-					entityB.Destroy();
+					World.Create(new Damage {
+						Value = 1,
+						TargetEntifier = entityB.Entifier,
+						SourceEntifier = projectile.OwnerEntifier
+					});
 					entityA.Destroy();
 				}
 			}
-			else if (entityB.Has<Projectile>() && entityA.Has<Player>()) {
+			else if (entityB.Has<Projectile>() && entityA.Has<Health>()) {
 				var projectile = entityB.Get<Projectile>();
 				if (projectile.OwnerEntifier != triggerEvent.EntifierA) {
-					entityA.Destroy();
+					World.Create(new Damage {
+						Value = 1,
+						TargetEntifier = entityA.Entifier,
+						SourceEntifier = projectile.OwnerEntifier
+					});
 					entityB.Destroy();
 				}
 			}
