@@ -14,6 +14,7 @@ public partial class BoxColliderBehavior : EntityBehaviour {
 	public override void OnEntityAssigned(Entity entity) {
 		_entity = entity;
 		_boxColliders = _entity.World.DataSet<BoxCollider>();
+		Update();
 	}
 	public override void OnEntityRemoved() {
 		_boxColliders = null;
@@ -21,6 +22,10 @@ public partial class BoxColliderBehavior : EntityBehaviour {
 	}
 
 	public override void _Process(double delta) {
+		Update();
+	}
+
+	private void Update() {
 		if (!_boxColliders.Has(_entity.Id)) {
 			return;
 		}

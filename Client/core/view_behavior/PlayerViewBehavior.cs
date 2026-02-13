@@ -26,6 +26,7 @@ public partial class PlayerViewBehavior : EntityBehaviour {
 		_players = _entity.World.DataSet<Player>();
 		_healths = _entity.World.DataSet<Health>();
 		_transforms = _entity.World.DataSet<Transform>();
+		Update();
 	}
 	public override void OnEntityRemoved() {
 		_rigidBodies = null;
@@ -34,6 +35,10 @@ public partial class PlayerViewBehavior : EntityBehaviour {
 	}
 
 	public override void _Process(double delta) {
+		Update();
+	}
+
+	private void Update() {
 		if (_rigidBodies.Has(_entity.Id)) {
 			var rigidBody = _rigidBodies.Get(_entity.Id);
 

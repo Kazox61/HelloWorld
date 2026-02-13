@@ -17,6 +17,7 @@ public partial class TransformViewBehavior : EntityBehaviour {
 	public override void OnEntityAssigned(Entity entity) {
 		_entity = entity;
 		_transforms = _entity.World.DataSet<Transform>();
+		Update();
 	}
 	public override void OnEntityRemoved() {
 		_transforms = null;
@@ -24,6 +25,10 @@ public partial class TransformViewBehavior : EntityBehaviour {
 	}
 
 	public override void _Process(double delta) {
+		Update();
+	}
+
+	private void Update() {
 		if (!_transforms.Has(_entity.Id)) {
 			return;
 		}

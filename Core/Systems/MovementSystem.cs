@@ -8,13 +8,10 @@ using Massive.Physics.Components;
 
 namespace HelloWorld.Core.Systems;
 
-
-
 public class MovementSystem : NetSystem, IUpdate {
 	public void Update() {
 		World.ForEach((ref Player player, ref RigidBody rigidBody, ref Transform transform) => {
-			var input = Inputs.GetInput<PlayerInput>(player.InputChannel);
-			var playerInput = input.LastFresh();
+			var playerInput = Inputs.GetInput<PlayerInput>(player.InputChannel).FadeOut(new FadeOutConfig(30, 60));
 			var moveDir = new FVector3(playerInput.DirectionX, FP.Zero, playerInput.DirectionY);
 			if (moveDir != FVector3.Zero) {
 				moveDir = FVector3.Normalize(moveDir);
@@ -35,7 +32,7 @@ public class MovementSystem : NetSystem, IUpdate {
 				);
 			}
 
-			if (playerInput.Jump && input.IsFresh && rigidBody.IsGrounded) {
+			if (playerInput.Jump && rigidBody.IsGrounded) {
 				rigidBody.Velocity += new FVector3(
 					FP.Zero,
 					15.ToFP(),

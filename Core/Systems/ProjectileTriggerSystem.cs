@@ -11,6 +11,10 @@ public class ProjectileTriggerSystem : NetSystem, IUpdate {
 			var entityA = triggerEvent.EntifierA.In(World);
 			var entityB = triggerEvent.EntifierB.In(World);
 			
+			if (!entityA.IsAlive || !entityB.IsAlive) {
+				return;
+			}
+			
 			if (entityA.Has<Projectile>() && entityB.Has<Health>()) {
 				var projectile = entityA.Get<Projectile>();
 				if (projectile.OwnerEntifier != triggerEvent.EntifierB) {
