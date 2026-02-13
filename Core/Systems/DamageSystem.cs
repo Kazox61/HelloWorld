@@ -1,4 +1,5 @@
-﻿using HelloWorld.Core.Components;
+﻿using Fixed64;
+using HelloWorld.Core.Components;
 using Massive;
 using Massive.Netcode;
 
@@ -10,17 +11,22 @@ public class DamageSystem : NetSystem, IUpdate {
 		var damages = World.DataSet<Damage>();
 
 		foreach (var entityId in damages) {
-			var damageEntity = damages.Get(entityId);
+			ref var damageEntity = ref damages.Get(entityId);
 			if (!healths.Has(damageEntity.TargetEntifier.Id)) {
 				continue;
 			}
 			
-			var health = healths.Get(damageEntity.TargetEntifier.Id);
+			ref var health = ref healths.Get(damageEntity.TargetEntifier.Id);
 			health.Value -= damageEntity.Value;
 			
 			health.Value = Math.Max(health.Value, 0);
 
 			if (health.Value == 0) {
+				var targetEntity = damageEntity.TargetEntifier.In(World);
+				if (targetEntity.Has<Player>()) {
+					var player = targetEntity.Get<Player>();
+					World.CreateEntity(new PlayerKill { InputChannel = player.InputChannel, RespawnCooldown = FP.One });
+				}
 				World.Destroy(damageEntity.TargetEntifier);
 			}
 		}
