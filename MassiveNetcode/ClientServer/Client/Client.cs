@@ -21,6 +21,8 @@ namespace Massive.Netcode
 		private double LastPingTime { get; set; } = -1;
 
 		public bool Synced { get; private set; }
+		
+		public double Rtt { get; private set; }
 
 		public Client(SessionConfig sessionConfig, Connection connection, double pingIntervalSeconds = 0.5f)
 		{
@@ -99,6 +101,7 @@ namespace Massive.Netcode
 						var serverTime = pongMessage.ServerReceiveTime + rtt * 0.5;
 						TickSync.UpdateTimeSync(serverTime, clientTime);
 						TickSync.UpdateRTT(rtt);
+						Rtt = rtt;
 						break;
 					}
 

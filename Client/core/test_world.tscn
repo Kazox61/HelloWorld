@@ -2,6 +2,7 @@
 
 [ext_resource type="Material" uid="uid://crh4edqr4kdta" path="res://materials/grid_mat.tres" id="1_mesw1"]
 [ext_resource type="Script" uid="uid://c7xcanepj3w47" path="res://core/ClientGameRunner.cs" id="1_ujdmt"]
+[ext_resource type="PackedScene" uid="uid://behmkrkcjnmf5" path="res://core/massive_stats.tscn" id="3_ujdmt"]
 
 [sub_resource type="Environment" id="Environment_ii4j5"]
 background_mode = 1
@@ -71,3 +72,5 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 48
 text = "Join"
+
+[node name="MassiveStats" parent="." unique_id=1301436929 instance=ExtResource("3_ujdmt")]

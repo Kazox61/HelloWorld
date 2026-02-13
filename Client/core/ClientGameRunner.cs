@@ -18,7 +18,7 @@ public partial class ClientGameRunner : Node {
 	public Massive.Netcode.Client Client { get; private set; }
 	public float ClientTime { get; private set; }
 	public IGameSetup GameSetup { get; private set; }
-	public Session Session => Client.Session;
+	public Session Session => Client?.Session;
 
 	public int LocalPlayerChannel => Client?.Connection.Channel ?? 0;
 
@@ -50,7 +50,7 @@ public partial class ClientGameRunner : Node {
 
 		// basicSimulation.Initialize();
 
-		Client.Connection.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2736));
+		Client.Connection.Connect(new IPEndPoint(IPAddress.Parse("46.224.38.11"), 2736));
 	}
 
 	public override void _PhysicsProcess(double delta) {

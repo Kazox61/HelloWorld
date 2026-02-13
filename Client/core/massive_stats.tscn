@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://behmkrkcjnmf5"]
+
+[ext_resource type="Script" uid="uid://bfta1jxqro563" path="res://core/MassiveStats.cs" id="1_0v80j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e26s1"]
+bg_color = Color(0.2123048, 0.21230489, 0.21230471, 0.4627451)
+
+[node name="MassiveStats" type="CanvasLayer" unique_id=1301436929 node_paths=PackedStringArray("_inputChannelLabel", "_entityCountLabel", "_rttLabel", "_approvedSimulationTickLabel", "_inputPredictionTick")]
+script = ExtResource("1_0v80j")
+_inputChannelLabel = NodePath("PanelContainer/MarginContainer/GridContainer/InputChannelLabel")
+_entityCountLabel = NodePath("PanelContainer/MarginContainer/GridContainer/EntityCount")
+_rttLabel = NodePath("PanelContainer/MarginContainer/GridContainer/RTTLabel")
+_approvedSimulationTickLabel = NodePath("PanelContainer/MarginContainer/GridContainer/ApprovedSimulationTickLabel")
+_inputPredictionTick = NodePath("PanelContainer/MarginContainer/GridContainer/InputPredictionTickLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1458097406]
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e26s1")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=605075003]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer" unique_id=1403769758]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=2074847055]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Input Channel"
+
+[node name="InputChannelLabel" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1004632099]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=996533969]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Entity Count"
+
+[node name="EntityCount" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1221170971]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1875755476]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RTT"
+
+[node name="RTTLabel" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1738244594]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=920351009]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "ApprovedSimulationTick"
+
+[node name="ApprovedSimulationTickLabel" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1995784330]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="Label5" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1385200041]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "InputPredictionTick"
+
+[node name="InputPredictionTickLabel" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1768304118]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
