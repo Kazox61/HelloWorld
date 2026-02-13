@@ -35,7 +35,7 @@ public partial class ClientGameRunner : Node {
 	}
 
 	private void JoinGame() {
-		Client = new Massive.Netcode.Client(new SessionConfig(), new TcpConnection());
+		Client = new Massive.Netcode.Client(new SessionConfig(), new TcpConnection(), 0.1);
 		Client.InputIdentifiers.RegisterAutomaticallyFromAllAssemblies();
 
 		GameSetup = new GameSetup();

@@ -14,9 +14,16 @@ public class PlayerAttackSystem : NetSystem, IUpdate {
 		World.ForEach((Entity entity, ref Player player, ref Transform transform) => {
 			var playerInput = Inputs.GetInput<PlayerInput>(player.InputChannel).FadeOut(new FadeOutConfig(30, 60));
 
+			player.AttackCooldown -= FP.One / Session.Config.TickRate;
+			if (player.AttackCooldown > FP.Zero) {
+				return;
+			}
+
 			if (!playerInput.Attack) {
 				return;
 			}
+
+			player.AttackCooldown += FP.Half;
 
 			var projectile = World.CreateEntity(new Projectile { OwnerEntifier = entity.Entifier });
 			projectile.Set(new Transform {

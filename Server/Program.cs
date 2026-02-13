@@ -13,4 +13,5 @@ while (true) {
 	var deltaTime = currentTime - lastTime;
 	lastTime = currentTime;
 	serverGame.Update(deltaTime);
+	await Task.Yield();
 }
