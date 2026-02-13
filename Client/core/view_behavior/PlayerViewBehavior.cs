@@ -49,7 +49,7 @@ public partial class PlayerViewBehavior : EntityBehaviour {
 
 		if (_players.Has(_entity.Id)) {
 			var player = _players.Get(_entity.Id);
-			_camera.Current = player.InputChannel == ClientGameRunner.LocalPlayerChannel;
+			_camera.Current = player.InputChannel == ClientGameRunner.Instance.LocalPlayerChannel;
 		}
 		
 		_debugLabel.Text = "";

@@ -20,8 +20,9 @@ fog_density = 1.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_gvltb"]
 size = Vector2(500, 500)
 
-[node name="ClientGame" type="Node3D" unique_id=1884578069]
+[node name="ClientGame" type="Node3D" unique_id=1884578069 node_paths=PackedStringArray("JoinButton")]
 script = ExtResource("1_ujdmt")
+JoinButton = NodePath("JoinButton")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1437914574]
 environment = SubResource("Environment_ii4j5")
@@ -53,3 +54,20 @@ size = Vector3(8, 4, 10)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1543624633]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 11, 11)
+current = true
+
+[node name="JoinButton" type="Button" parent="." unique_id=1581398544]
+custom_minimum_size = Vector2(300, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -37.5
+offset_right = 48.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Join"

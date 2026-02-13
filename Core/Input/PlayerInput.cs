@@ -1,12 +1,13 @@
-﻿using Massive.Netcode;
+﻿using Fixed64;
+using Massive.Netcode;
 
 namespace HelloWorld.Core.Input;
 
 public struct PlayerInput : IInput {
-	public float DirectionX;
-	public float DirectionY;
-	public float AimX;
-	public float AimY;
+	public FP DirectionX;
+	public FP DirectionY;
+	public FP AimX;
+	public FP AimY;
 	public bool Jump;
 	public bool Attack;
 }

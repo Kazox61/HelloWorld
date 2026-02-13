@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveCommon", "MassiveCom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveQol", "MassiveQol\MassiveQol.csproj", "{CB1CBC90-E649-4045-8D1C-3BFBE028C17F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{4A9E658C-B4AD-46FB-821E-62DCC78DF01F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -79,5 +81,11 @@ Global
 		{CB1CBC90-E649-4045-8D1C-3BFBE028C17F}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
 		{CB1CBC90-E649-4045-8D1C-3BFBE028C17F}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB1CBC90-E649-4045-8D1C-3BFBE028C17F}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{4A9E658C-B4AD-46FB-821E-62DCC78DF01F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9E658C-B4AD-46FB-821E-62DCC78DF01F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9E658C-B4AD-46FB-821E-62DCC78DF01F}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9E658C-B4AD-46FB-821E-62DCC78DF01F}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9E658C-B4AD-46FB-821E-62DCC78DF01F}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9E658C-B4AD-46FB-821E-62DCC78DF01F}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

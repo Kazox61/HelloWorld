@@ -9,7 +9,7 @@ public partial class StartScene : Node {
 	[Export] public PackedScene ServerScene;
 	[Export] public PackedScene ClientScene;
 
-	public override async void _Ready() {
+	public override void _Ready() {
 		if (OS.GetCmdlineArgs().Contains("--server")) {
 			var server = ServerScene.Instantiate();
 			AddChild(server);
@@ -17,7 +17,6 @@ public partial class StartScene : Node {
 			return;
 		}
 
-		await Task.Delay(TimeSpan.FromSeconds(2));
 		var client = ClientScene.Instantiate();
 		AddChild(client);
 		GetWindow().Title = "Massive Client";

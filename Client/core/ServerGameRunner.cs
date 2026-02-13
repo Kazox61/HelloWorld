@@ -6,28 +6,14 @@ using Massive.Netcode;
 namespace HelloWorld.Client.core;
 
 public partial class ServerGameRunner : Node {
-	public Server Server;
-	public double Time;
+	public ServerGame ServerGame;
 
 	public override void _Ready() {
-		Server = new Server(new SessionConfig(), new TcpConnectionsListener(1987));
-		Server.InputIdentifiers.RegisterAutomaticallyFromAllAssemblies();
-
-		new GameSetup().SetupGame(Server.Session.Systems, Server.Session.World, 33);
-
-		Server.Session.Systems.Build(Server.Session);
-
-		var basicSimulation = new BasicSimulation(Server.Session.Systems);
-
-		Server.Session.Simulations.Add(basicSimulation);
-
-		// basicSimulation.Initialize();
-
-		Server.ConnectionListener.Start();
+		ServerGame = new ServerGame();
+		ServerGame.Start();
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		Time += delta;
-		Server.Update(Time);
+		ServerGame.Update(delta);
 	}
 }
