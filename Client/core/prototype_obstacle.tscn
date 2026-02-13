@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cy6xn78mh2rep"]
+
+[ext_resource type="Script" uid="uid://q20lhqtox0l3" path="res://addons/massive-godot-integration/view_synchronizer/EntityView.cs" id="1_8q7cq"]
+[ext_resource type="Material" uid="uid://crh4edqr4kdta" path="res://materials/grid_mat.tres" id="2_m8vs4"]
+[ext_resource type="Script" uid="uid://cd1hxdoxapn8g" path="res://core/view_behavior/TransformViewBehavior.cs" id="3_xwn2t"]
+[ext_resource type="Script" uid="uid://b3j5aptjxwdgm" path="res://core/view_behavior/BoxColliderBehavior.cs" id="4_tp8k6"]
+[ext_resource type="Script" uid="uid://cypnkpsjkrp4b" path="res://core/view_behavior/PrototypeMeshBehavior.cs" id="5_m8vs4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xl84e"]
+resource_local_to_scene = true
+
+[node name="PrototypeObstacle" type="Node3D" unique_id=1595048788 node_paths=PackedStringArray("_entityBehaviours")]
+script = ExtResource("1_8q7cq")
+_entityBehaviours = [NodePath("TransformViewBehavior"), NodePath("BoxColliderBehavior"), NodePath("PrototypeMeshBehavior")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1625012529]
+material_override = ExtResource("2_m8vs4")
+mesh = SubResource("BoxMesh_xl84e")
+
+[node name="TransformViewBehavior" type="Node" parent="." unique_id=1079627308 node_paths=PackedStringArray("_targetNodePosition", "_targetNodeRotation")]
+script = ExtResource("3_xwn2t")
+_targetNodePosition = NodePath("..")
+_targetNodeRotation = NodePath("..")
+metadata/_custom_type_script = "uid://cd1hxdoxapn8g"
+
+[node name="BoxColliderBehavior" type="Node" parent="." unique_id=1118015596]
+script = ExtResource("4_tp8k6")
+metadata/_custom_type_script = "uid://b3j5aptjxwdgm"
+
+[node name="PrototypeMeshBehavior" type="Node" parent="." unique_id=145229226 node_paths=PackedStringArray("_targetMeshInstance")]
+script = ExtResource("5_m8vs4")
+_targetMeshInstance = NodePath("../MeshInstance3D")
+metadata/_custom_type_script = "uid://cypnkpsjkrp4b"

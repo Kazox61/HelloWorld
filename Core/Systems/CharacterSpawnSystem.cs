@@ -26,11 +26,11 @@ public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
 				Velocity = FVector3.Zero,
 				InverseMass = FP.One,
 				Restitution = FP.Zero,
-				Friction = 0.5f.ToFP(),
+				Friction = FP.Half,
 				UseGravity = true
 			});
 			player.Set(new BoxCollider {
-				HalfExtents = new FVector3(0.5f.ToFP(), 0.8f.ToFP(), 0.5f.ToFP())
+				HalfExtents = new FVector3(FP.Half, 0.8f.ToFP(), FP.Half)
 			});
 			player.Set(new Health { Value = 1, MaxValue = 1 });
 		}
