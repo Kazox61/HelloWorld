@@ -7,7 +7,7 @@ public class ServerGame {
 	public double Time { get; private set; }
 
 	public ServerGame() {
-		Server = new Server(new SessionConfig(), new TcpConnectionsListener(1987));
+		Server = new Server(new SessionConfig(), new TcpConnectionsListener(2736));
 	}
 
 	public void Start() {
