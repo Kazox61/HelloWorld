@@ -1,7 +1,6 @@
 ﻿using Godot;
 using HelloWorld.Core;
 using Massive.Common;
-using Massive.Netcode;
 
 namespace HelloWorld.Client.core;
 

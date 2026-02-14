@@ -7,9 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FixedPoint\FixedPoint.csproj" />
-      <ProjectReference Include="..\MassiveEcs\MassiveEcs.csproj" />
-      <ProjectReference Include="..\MassiveNetcode\MassiveNetcode.csproj" />
+      <ProjectReference Include="..\fixed-point\Runtime\FixedPoint.csproj" />
+      <ProjectReference Include="..\massive-ecs\Runtime\Massive.csproj" />
     </ItemGroup>
 
 </Project>

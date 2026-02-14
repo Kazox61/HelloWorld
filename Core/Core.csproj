@@ -8,12 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FixedPoint\FixedPoint.csproj" />
+      <ProjectReference Include="..\massive-netcode\Runtime\MassiveNetcode.csproj" />
+      <ProjectReference Include="..\massive-physics\Runtime\MassivePhysics.csproj" />
+      <ProjectReference Include="..\massive-qol\Runtime\MassiveQol.csproj" />
+      <ProjectReference Include="..\massive-serialization\Runtime\MassiveSerialization.csproj" />
       <ProjectReference Include="..\MassiveCommon\MassiveCommon.csproj" />
-      <ProjectReference Include="..\MassiveEcs\MassiveEcs.csproj" />
-      <ProjectReference Include="..\MassiveNetcode\MassiveNetcode.csproj" />
-      <ProjectReference Include="..\MassivePhysics\MassivePhysics.csproj" />
-      <ProjectReference Include="..\MassiveQol\MassiveQol.csproj" />
     </ItemGroup>
 
     <ItemGroup>
