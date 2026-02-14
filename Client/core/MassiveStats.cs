@@ -3,6 +3,7 @@
 namespace HelloWorld.Client.core;
 
 public partial class MassiveStats : CanvasLayer {
+	[Export] private Label _fpsLabel;
 	[Export] private Label _inputChannelLabel;
 	[Export] private Label _entityCountLabel;
 	[Export] private Label _rttLabel;
@@ -10,6 +11,8 @@ public partial class MassiveStats : CanvasLayer {
 	[Export] private Label _inputPredictionTick;
 
 	public override void _Process(double delta) {
+		_fpsLabel.Text = Engine.GetFramesPerSecond().ToString("0");
+		
 		if (ClientGameRunner.Instance.Client != null) {
 			_inputChannelLabel.Text = ClientGameRunner.Instance.LocalPlayerChannel.ToString();
 			_rttLabel.Text = (ClientGameRunner.Instance.Client.Rtt * 1000).ToString("0.00") + "ms";

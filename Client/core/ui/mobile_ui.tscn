@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://ca6j02vqyfedt"]
+
+[ext_resource type="Script" uid="uid://b7b8kksl0ggji" path="res://core/ui/InputActionTrigger.cs" id="1_42fb7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42fb7"]
+bg_color = Color(1, 1, 1, 0.5019608)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+corner_detail = 20
+
+[node name="MobileUi" type="CanvasLayer" unique_id=965830345]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1568852798]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VirtualJoystick" type="VirtualJoystick" parent="HBoxContainer" unique_id=5358772]
+layout_mode = 2
+size_flags_horizontal = 3
+joystick_mode = 1
+joystick_size = 200.0
+tip_size = 100.0
+deadzone_ratio = 0.3
+initial_offset_ratio = Vector2(0.4, 0.75)
+action_left = &"move_left"
+action_right = &"move_right"
+action_up = &"move_forward"
+action_down = &"move_back"
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=160541159]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Control" unique_id=1865786009]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -356.0
+offset_top = -440.0
+offset_right = -196.0
+offset_bottom = -280.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_42fb7")
+
+[node name="InputActionTrigger" type="Node" parent="HBoxContainer/Control/Panel" unique_id=1485057212]
+script = ExtResource("1_42fb7")
+ActionName = &"shoot"
+metadata/_custom_type_script = "uid://b7b8kksl0ggji"
+
+[node name="Panel2" type="Panel" parent="HBoxContainer/Control" unique_id=2085683089]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -359.0
+offset_top = -238.0
+offset_right = -199.0
+offset_bottom = -78.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_42fb7")
+
+[node name="InputActionTrigger" type="Node" parent="HBoxContainer/Control/Panel2" unique_id=1794003466]
+script = ExtResource("1_42fb7")
+ActionName = &"jump"
+metadata/_custom_type_script = "uid://b7b8kksl0ggji"

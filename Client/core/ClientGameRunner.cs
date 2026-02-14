@@ -50,7 +50,7 @@ public partial class ClientGameRunner : Node {
 
 		// basicSimulation.Initialize();
 
-		Client.Connection.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2736));
+		Client.Connection.Connect(new IPEndPoint(IPAddress.Parse("46.224.38.11"), 2736));
 	}
 
 	public override void _PhysicsProcess(double delta) {

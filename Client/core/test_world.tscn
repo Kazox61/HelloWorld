@@ -3,6 +3,7 @@
 [ext_resource type="Material" uid="uid://crh4edqr4kdta" path="res://materials/grid_mat.tres" id="1_mesw1"]
 [ext_resource type="Script" uid="uid://c7xcanepj3w47" path="res://core/ClientGameRunner.cs" id="1_ujdmt"]
 [ext_resource type="PackedScene" uid="uid://behmkrkcjnmf5" path="res://core/massive_stats.tscn" id="3_ujdmt"]
+[ext_resource type="PackedScene" uid="uid://ca6j02vqyfedt" path="res://core/ui/mobile_ui.tscn" id="4_3j8y6"]
 
 [sub_resource type="Environment" id="Environment_ii4j5"]
 background_mode = 1
@@ -23,7 +24,7 @@ size = Vector2(500, 500)
 
 [node name="ClientGame" type="Node3D" unique_id=1884578069 node_paths=PackedStringArray("JoinButton")]
 script = ExtResource("1_ujdmt")
-JoinButton = NodePath("JoinButton")
+JoinButton = NodePath("CanvasLayer/JoinButton")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1437914574]
 environment = SubResource("Environment_ii4j5")
@@ -57,20 +58,24 @@ size = Vector3(8, 4, 10)
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 11, 11)
 current = true
 
-[node name="JoinButton" type="Button" parent="." unique_id=1581398544]
+[node name="MassiveStats" parent="." unique_id=1301436929 instance=ExtResource("3_ujdmt")]
+
+[node name="MobileUi" parent="." unique_id=965830345 instance=ExtResource("4_3j8y6")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2007768281]
+
+[node name="JoinButton" type="Button" parent="CanvasLayer" unique_id=1581398544]
 custom_minimum_size = Vector2(300, 100)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -37.5
-offset_right = 48.0
-offset_bottom = 37.5
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 48
 text = "Join"
-
-[node name="MassiveStats" parent="." unique_id=1301436929 instance=ExtResource("3_ujdmt")]

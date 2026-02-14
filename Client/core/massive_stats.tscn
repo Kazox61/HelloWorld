@@ -5,8 +5,9 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e26s1"]
 bg_color = Color(0.2123048, 0.21230489, 0.21230471, 0.4627451)
 
-[node name="MassiveStats" type="CanvasLayer" unique_id=1301436929 node_paths=PackedStringArray("_inputChannelLabel", "_entityCountLabel", "_rttLabel", "_approvedSimulationTickLabel", "_inputPredictionTick")]
+[node name="MassiveStats" type="CanvasLayer" unique_id=1301436929 node_paths=PackedStringArray("_fpsLabel", "_inputChannelLabel", "_entityCountLabel", "_rttLabel", "_approvedSimulationTickLabel", "_inputPredictionTick")]
 script = ExtResource("1_0v80j")
+_fpsLabel = NodePath("PanelContainer/MarginContainer/GridContainer/FPSLabel")
 _inputChannelLabel = NodePath("PanelContainer/MarginContainer/GridContainer/InputChannelLabel")
 _entityCountLabel = NodePath("PanelContainer/MarginContainer/GridContainer/EntityCount")
 _rttLabel = NodePath("PanelContainer/MarginContainer/GridContainer/RTTLabel")
@@ -31,6 +32,15 @@ layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 8
 columns = 2
+
+[node name="Label6" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1711024]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "FPS"
+
+[node name="FPSLabel" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=1752256228]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="Label3" type="Label" parent="PanelContainer/MarginContainer/GridContainer" unique_id=2074847055]
 layout_mode = 2
