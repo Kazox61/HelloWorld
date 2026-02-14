@@ -12,7 +12,7 @@ script = ExtResource("1_y0177")
 _entityBehaviours = [NodePath("TransformViewBehavior"), NodePath("PlayerViewBehavior"), NodePath("BoxColliderBehavior")]
 
 [node name="GodotPlushSkin" parent="." unique_id=1916972161 instance=ExtResource("1_vjlsr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="TransformViewBehavior" type="Node" parent="." unique_id=2066113465 node_paths=PackedStringArray("_targetNodePosition", "_targetNodeRotation")]
 script = ExtResource("3_7dqni")

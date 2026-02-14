@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://ca6j02vqyfedt"]
 
 [ext_resource type="Script" uid="uid://b7b8kksl0ggji" path="res://core/ui/InputActionTrigger.cs" id="1_42fb7"]
+[ext_resource type="Script" uid="uid://cxjsfyy3rvasc" path="res://core/ui/MobileUi.cs" id="1_g81g6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42fb7"]
 bg_color = Color(1, 1, 1, 0.5019608)
-corner_radius_top_left = 80
-corner_radius_top_right = 80
-corner_radius_bottom_right = 80
-corner_radius_bottom_left = 80
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 corner_detail = 20
 
 [node name="MobileUi" type="CanvasLayer" unique_id=965830345]
+script = ExtResource("1_g81g6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1568852798]
 anchors_preset = 15
@@ -18,13 +20,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="VirtualJoystick" type="VirtualJoystick" parent="HBoxContainer" unique_id=5358772]
+custom_minimum_size = Vector2(960, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 joystick_mode = 1
-joystick_size = 200.0
-tip_size = 100.0
+joystick_size = 300.0
+tip_size = 125.0
 deadzone_ratio = 0.3
 initial_offset_ratio = Vector2(0.4, 0.75)
 action_left = &"move_left"
@@ -32,9 +35,13 @@ action_right = &"move_right"
 action_up = &"move_forward"
 action_down = &"move_back"
 
-[node name="Control" type="Control" parent="HBoxContainer" unique_id=160541159]
+[node name="Expander" type="Control" parent="HBoxContainer" unique_id=1212803084]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=160541159]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
 
 [node name="Panel" type="Panel" parent="HBoxContainer/Control" unique_id=1865786009]
 custom_minimum_size = Vector2(160, 160)
@@ -44,10 +51,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -356.0
-offset_top = -440.0
-offset_right = -196.0
-offset_bottom = -280.0
+offset_left = -318.0
+offset_top = -485.0
+offset_right = -118.0
+offset_bottom = -285.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_42fb7")
@@ -58,17 +65,17 @@ ActionName = &"shoot"
 metadata/_custom_type_script = "uid://b7b8kksl0ggji"
 
 [node name="Panel2" type="Panel" parent="HBoxContainer/Control" unique_id=2085683089]
-custom_minimum_size = Vector2(160, 160)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -359.0
-offset_top = -238.0
-offset_right = -199.0
-offset_bottom = -78.0
+offset_left = -481.0
+offset_top = -264.0
+offset_right = -281.0
+offset_bottom = -64.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_42fb7")

@@ -49,7 +49,7 @@ public class CharacterSpawnSystem : NetSystem, IUpdate, IInject<MassiveRandom> {
 			UseGravity = true
 		});
 		player.Set(new BoxCollider {
-			HalfExtents = new FVector3(FP.Half, 0.8f.ToFP(), FP.Half)
+			HalfExtents = new FVector3(FP.Half, FP.One, FP.Half)
 		});
 		player.Set(new Health { Value = 10, MaxValue = 10 });
 	}

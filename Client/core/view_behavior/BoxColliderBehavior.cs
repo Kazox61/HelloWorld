@@ -26,6 +26,7 @@ public partial class BoxColliderBehavior : EntityBehaviour {
 	}
 
 	private void Update() {
+		return;
 		if (!_boxColliders.Has(_entity.Id)) {
 			return;
 		}
