@@ -30,6 +30,7 @@ public class PlayerAttackSystem : NetSystem, IUpdate {
 				Position = transform.Position + new FVector3(0.ToFP(), 0.5f.ToFP(), 0.ToFP()),
 			});
 
+			/*
 			var yaw = transform.Rotation.Y;
 			var pitch = transform.Rotation.X;
 			var cosPitch = FP.Cos(pitch);
@@ -38,6 +39,8 @@ public class PlayerAttackSystem : NetSystem, IUpdate {
 				-FP.Sin(pitch),
 				FP.Cos(yaw) * cosPitch
 			));
+			*/
+			var direction = new FVector3(playerInput.AimDirectionX, 0.ToFP(), playerInput.AimDirectionY);
 
 			projectile.Set(new RigidBody {
 				Velocity = direction * 20.ToFP(),

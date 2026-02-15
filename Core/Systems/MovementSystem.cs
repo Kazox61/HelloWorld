@@ -12,7 +12,7 @@ public class MovementSystem : NetSystem, IUpdate {
 	public void Update() {
 		World.ForEach((ref Player player, ref RigidBody rigidBody, ref Transform transform) => {
 			var playerInput = Inputs.GetInput<PlayerInput>(player.InputChannel).FadeOut(new FadeOutConfig(30, 60));
-			var moveDir = new FVector3(playerInput.DirectionX, FP.Zero, playerInput.DirectionY);
+			var moveDir = new FVector3(playerInput.MoveDirectionX, FP.Zero, playerInput.MoveDirectionY);
 			if (moveDir != FVector3.Zero) {
 				moveDir = FVector3.Normalize(moveDir);
 			}

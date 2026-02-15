@@ -13,6 +13,7 @@ public partial class ClientGameRunner : Node {
 	public static ClientGameRunner Instance { get; private set; }
 	
 	[Export] public Button JoinButton;
+	[Export] public InputCollector InputCollector;
 	
 	public GodotViewSynchronizer GodotViewSynchronizer { get; private set; }
 	public Massive.Netcode.Client Client { get; private set; }
@@ -62,7 +63,14 @@ public partial class ClientGameRunner : Node {
 		
 		ClientTime += (float)delta;
 
-		var playerInput = CollectInput();
+		var playerInput = new PlayerInput {
+			MoveDirectionX = InputCollector.MoveDirection.X.ToFP(),
+			MoveDirectionY = InputCollector.MoveDirection.Y.ToFP(),
+			AimDirectionX = InputCollector.AimDirection.X.ToFP(),
+			AimDirectionY = InputCollector.AimDirection.Y.ToFP(),
+			Jump = InputCollector.IsJumping,
+			Attack = InputCollector.IsAttacking
+		};
 
 		Client.Session.Inputs.SetPredictionInputAt(
 			Client.InputPredictionTick(ClientTime),
@@ -73,19 +81,5 @@ public partial class ClientGameRunner : Node {
 		Client.Update(ClientTime);
 		
 		GodotViewSynchronizer.SynchronizeAll(Session.World);
-	}
-	
-	private static PlayerInput CollectInput() {
-		var inputDirection = Input
-			.GetVector("move_left", "move_right", "move_forward", "move_back")
-			.Normalized();
-		var jump = Input.IsActionJustPressed("jump");
-		var attack = Input.IsActionJustPressed("shoot");
-		return new PlayerInput {
-			DirectionX = inputDirection.X.ToFP(),
-			DirectionY = inputDirection.Y.ToFP(),
-			Jump = jump,
-			Attack = attack
-		};
 	}
 }

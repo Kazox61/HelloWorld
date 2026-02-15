@@ -4,8 +4,10 @@ using Massive.Netcode;
 namespace HelloWorld.Core.Input;
 
 public struct PlayerInput : IFadeOutInput<PlayerInput> {
-	public FP DirectionX;
-	public FP DirectionY;
+	public FP MoveDirectionX;
+	public FP MoveDirectionY;
+	public FP AimDirectionX;
+	public FP AimDirectionY;
 	public bool Jump;
 	public bool Attack;
 
@@ -16,8 +18,10 @@ public struct PlayerInput : IFadeOutInput<PlayerInput> {
 		var buttonsIsFresh = ticksPassed < 30;
 
 		return new PlayerInput {
-			DirectionX = DirectionX * directionModifier,
-			DirectionY = DirectionY * directionModifier,
+			MoveDirectionX = MoveDirectionX * directionModifier,
+			MoveDirectionY = MoveDirectionY * directionModifier,
+			AimDirectionX = buttonsIsFresh ? AimDirectionX : FP.Zero,
+			AimDirectionY = buttonsIsFresh ? AimDirectionY : FP.Zero,
 			Jump = buttonsIsFresh && Jump,
 			Attack = buttonsIsFresh && Attack,
 		};

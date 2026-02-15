@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c7xcanepj3w47" path="res://core/ClientGameRunner.cs" id="1_ujdmt"]
 [ext_resource type="PackedScene" uid="uid://behmkrkcjnmf5" path="res://core/massive_stats.tscn" id="3_ujdmt"]
 [ext_resource type="PackedScene" uid="uid://ca6j02vqyfedt" path="res://core/ui/mobile_ui.tscn" id="4_3j8y6"]
+[ext_resource type="Script" uid="uid://bstcfd548qsv6" path="res://core/InputCollector.cs" id="5_i0xp2"]
 
 [sub_resource type="Environment" id="Environment_ii4j5"]
 background_mode = 1
@@ -22,9 +23,10 @@ fog_density = 1.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_gvltb"]
 size = Vector2(500, 500)
 
-[node name="ClientGame" type="Node3D" unique_id=1884578069 node_paths=PackedStringArray("JoinButton")]
+[node name="ClientGame" type="Node3D" unique_id=1884578069 node_paths=PackedStringArray("JoinButton", "InputCollector")]
 script = ExtResource("1_ujdmt")
 JoinButton = NodePath("CanvasLayer/JoinButton")
+InputCollector = NodePath("InputCollector")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1437914574]
 environment = SubResource("Environment_ii4j5")
@@ -79,3 +81,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 48
 text = "Join"
+
+[node name="InputCollector" type="Node" parent="." unique_id=1760027780 node_paths=PackedStringArray("_mobileUi")]
+script = ExtResource("5_i0xp2")
+_mobileUi = NodePath("../MobileUi")
