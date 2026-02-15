@@ -24,12 +24,15 @@ public partial class InputCollector : Node {
 		
 		MoveDirection = Input
 			.GetVector("move_left", "move_right", "move_forward", "move_back")
+			.Rotated(-Mathf.Pi / 4)
 			.Normalized();
 		IsJumping = Input.IsActionJustPressed("jump");
 	}
 	
 	private void OnAimJoystickFlicked(Vector2 direction) {
-		AimDirection = direction.Normalized();
+		AimDirection = direction
+			.Rotated(-Mathf.Pi / 4)
+			.Normalized();
 		IsAttacking = true;
 	}
 }
