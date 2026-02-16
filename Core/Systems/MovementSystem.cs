@@ -9,14 +9,31 @@ using Massive.Physics.Components;
 namespace HelloWorld.Core.Systems;
 
 public class MovementSystem : NetSystem, IUpdate {
+	private static FP _sensitivity = 0.1f.ToFP();
+	
 	public void Update() {
 		World.ForEach((ref Player player, ref RigidBody rigidBody, ref Transform transform) => {
 			var playerInput = Inputs.GetInput<PlayerInput>(player.InputChannel).FadeOut(new FadeOutConfig(30, 60));
-			var moveDir = new FVector3(playerInput.MoveDirectionX, FP.Zero, playerInput.MoveDirectionY);
-			if (moveDir != FVector3.Zero) {
-				moveDir = FVector3.Normalize(moveDir);
-			}
+			
+			player.Yaw += playerInput.AimDirectionX * (FP.One / Session.Config.TickRate) * _sensitivity;
+			player.Pitch += playerInput.AimDirectionY * (FP.One / Session.Config.TickRate) * _sensitivity;
+			
+			player.Pitch = FP.Clamp(player.Pitch, -FP.HalfPi, FP.HalfPi);
+			
+			var forward = new FVector3(
+				FP.Sin(player.Yaw),
+				FP.Zero,
+				FP.Cos(player.Yaw)
+			);
 
+			var right = new FVector3(
+				forward.Z,
+				FP.Zero,
+				-forward.X
+			);
+			
+			var moveDirection = forward * playerInput.MoveDirectionY + right * playerInput.MoveDirectionX;
+			var moveDir = FVector3.NormalizeSafe(moveDirection);
 			var moveSpeed = 6.ToFP();
 			rigidBody.Velocity = new FVector3(
 				moveDir.X * moveSpeed,

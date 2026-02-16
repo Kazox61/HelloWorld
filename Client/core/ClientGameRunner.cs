@@ -63,14 +63,7 @@ public partial class ClientGameRunner : Node {
 		
 		ClientTime += (float)delta;
 
-		var playerInput = new PlayerInput {
-			MoveDirectionX = InputCollector.MoveDirection.X.ToFP(),
-			MoveDirectionY = InputCollector.MoveDirection.Y.ToFP(),
-			AimDirectionX = InputCollector.AimDirection.X.ToFP(),
-			AimDirectionY = InputCollector.AimDirection.Y.ToFP(),
-			Jump = InputCollector.IsJumping,
-			Attack = InputCollector.IsAttacking
-		};
+		var playerInput = InputCollector.GatherInput();
 
 		Client.Session.Inputs.SetPredictionInputAt(
 			Client.InputPredictionTick(ClientTime),

@@ -19,6 +19,7 @@ public partial class TransformViewBehavior : EntityBehaviour {
 		_transforms = _entity.World.DataSet<Transform>();
 		Update();
 	}
+
 	public override void OnEntityRemoved() {
 		_transforms = null;
 		_entity = Entity.Dead;

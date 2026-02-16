@@ -11,10 +11,18 @@ corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 corner_detail = 20
 
-[node name="MobileUi" type="CanvasLayer" unique_id=965830345 node_paths=PackedStringArray("MoveJoystick", "AimJoystick")]
+[node name="MobileUi" type="CanvasLayer" unique_id=965830345 node_paths=PackedStringArray("MoveJoystick", "AimInputCollector")]
 script = ExtResource("1_g81g6")
 MoveJoystick = NodePath("HBoxContainer/VirtualJoystick")
-AimJoystick = NodePath("HBoxContainer/Control/VirtualJoystick")
+AimInputCollector = NodePath("AimInputCollector")
+
+[node name="AimInputCollector" type="Control" parent="." unique_id=374793487]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1568852798]
 anchors_preset = 15
@@ -22,6 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="VirtualJoystick" type="VirtualJoystick" parent="HBoxContainer" unique_id=5358772]
@@ -44,19 +53,7 @@ size_flags_horizontal = 3
 [node name="Control" type="Control" parent="HBoxContainer" unique_id=160541159]
 custom_minimum_size = Vector2(960, 0)
 layout_mode = 2
-
-[node name="VirtualJoystick" type="VirtualJoystick" parent="HBoxContainer/Control" unique_id=1390959471]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-joystick_mode = 1
-joystick_size = 300.0
-tip_size = 125.0
-deadzone_ratio = 0.3
-initial_offset_ratio = Vector2(0.6, 0.75)
+mouse_filter = 2
 
 [node name="Panel2" type="Panel" parent="HBoxContainer/Control" unique_id=2085683089]
 custom_minimum_size = Vector2(200, 200)
@@ -66,10 +63,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -274.0
-offset_top = -682.0
-offset_right = -74.0
-offset_bottom = -482.0
+offset_left = -307.0
+offset_top = -499.0
+offset_right = -107.0
+offset_bottom = -299.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_42fb7")
@@ -77,4 +74,25 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_42fb7")
 [node name="InputActionTrigger" type="Node" parent="HBoxContainer/Control/Panel2" unique_id=1794003466]
 script = ExtResource("1_42fb7")
 ActionName = &"jump"
+metadata/_custom_type_script = "uid://b7b8kksl0ggji"
+
+[node name="Panel3" type="Panel" parent="HBoxContainer/Control" unique_id=1116878100]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -529.0
+offset_top = -282.0
+offset_right = -329.0
+offset_bottom = -82.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_42fb7")
+
+[node name="InputActionTrigger" type="Node" parent="HBoxContainer/Control/Panel3" unique_id=1472256930]
+script = ExtResource("1_42fb7")
+ActionName = &"shoot"
 metadata/_custom_type_script = "uid://b7b8kksl0ggji"

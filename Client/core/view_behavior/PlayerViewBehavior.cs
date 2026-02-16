@@ -4,28 +4,25 @@ using HelloWorld.addons.massive_godot_integration.view_synchronizer;
 using HelloWorld.Client.core;
 using HelloWorld.Core.Components;
 using Massive;
-using Massive.Common;
 using Massive.Physics.Components;
 
 namespace HelloWorld.Client.Core;
 
 public partial class PlayerViewBehavior : EntityBehaviour {
+	[Export] private Node3D _rootNode;
 	[Export] private GodotPlushSkin _plushSkin;
+	[Export] private Node3D _cameraPivot;
 	[Export] private Camera3D _camera;
-	[Export] private Label _debugLabel;
+	[Export] private CanvasLayer _playerUi;
 	
 	private Entity _entity;
 	private DataSet<RigidBody> _rigidBodies;
 	private DataSet<Player> _players;
-	private DataSet<Health> _healths;
-	private DataSet<Transform> _transforms;
 	
 	public override void OnEntityAssigned(Entity entity) {
 		_entity = entity;
 		_rigidBodies = _entity.World.DataSet<RigidBody>();
 		_players = _entity.World.DataSet<Player>();
-		_healths = _entity.World.DataSet<Health>();
-		_transforms = _entity.World.DataSet<Transform>();
 		Update();
 	}
 	public override void OnEntityRemoved() {
@@ -55,18 +52,11 @@ public partial class PlayerViewBehavior : EntityBehaviour {
 		if (_players.Has(_entity.Id)) {
 			var player = _players.Get(_entity.Id);
 			_camera.Current = player.InputChannel == ClientGameRunner.Instance.LocalPlayerChannel;
-		}
-		
-		_debugLabel.Text = "";
+			_plushSkin.Visible = player.InputChannel != ClientGameRunner.Instance.LocalPlayerChannel;
+			_playerUi.Visible = player.InputChannel == ClientGameRunner.Instance.LocalPlayerChannel;
 
-		if (_transforms.Has(_entity.Id)) {
-			var transform = _transforms.Get(_entity.Id);
-			_debugLabel.Text += $"({transform.Position.X.ToFloat():0.00}, {transform.Position.Y.ToFloat():0.00}, {transform.Position.Z.ToFloat():0.00})";
-		}
-		
-		if (_healths.Has(_entity.Id)) {
-			var health = _healths.Get(_entity.Id);
-			_debugLabel.Text += $"\n{health.Value}:{health.MaxValue}";
+			_rootNode.Rotation = new Vector3(0, player.Yaw.ToFloat(), 0);
+			_cameraPivot.Rotation = new Vector3(player.Pitch.ToFloat(), 0, 0);
 		}
 	}
 }

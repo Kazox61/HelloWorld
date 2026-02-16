@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cd1hxdoxapn8g" path="res://core/view_behavior/TransformViewBehavior.cs" id="3_7dqni"]
 [ext_resource type="Script" uid="uid://cje7a1nri72ep" path="res://core/view_behavior/PlayerViewBehavior.cs" id="4_43feq"]
 [ext_resource type="Script" uid="uid://b3j5aptjxwdgm" path="res://core/view_behavior/BoxColliderBehavior.cs" id="5_20ww2"]
-[ext_resource type="Script" uid="uid://dwmfcsxnpawux" path="res://core/WorldPositionUpdater.cs" id="6_liwyg"]
+[ext_resource type="Texture2D" uid="uid://4d3q1jtko3bb" path="res://core/resources/crosshair003.png" id="6_liwyg"]
 
 [node name="Player" type="Node3D" unique_id=324689971 node_paths=PackedStringArray("_entityBehaviours")]
 script = ExtResource("1_y0177")
@@ -19,28 +19,36 @@ script = ExtResource("3_7dqni")
 _targetNodePosition = NodePath("..")
 _targetNodeRotation = NodePath("../GodotPlushSkin")
 
-[node name="PlayerViewBehavior" type="Node" parent="." unique_id=726075329 node_paths=PackedStringArray("_plushSkin", "_camera", "_debugLabel")]
+[node name="PlayerViewBehavior" type="Node" parent="." unique_id=726075329 node_paths=PackedStringArray("_rootNode", "_plushSkin", "_cameraPivot", "_camera", "_playerUi")]
 script = ExtResource("4_43feq")
+_rootNode = NodePath("..")
 _plushSkin = NodePath("../GodotPlushSkin")
-_camera = NodePath("../Camera")
-_debugLabel = NodePath("../DebugLabel")
+_cameraPivot = NodePath("../CameraPivot")
+_camera = NodePath("../CameraPivot/Camera")
+_playerUi = NodePath("../PlayerUi")
 
 [node name="BoxColliderBehavior" type="Node" parent="." unique_id=152894813]
 script = ExtResource("5_20ww2")
 
-[node name="Camera" type="Camera3D" parent="." unique_id=1951030475]
-transform = Transform3D(0.70710677, -0.6123724, 0.35355332, 0, 0.49999994, 0.8660254, -0.70710677, -0.6123724, 0.35355332, 12.5, 30, 12.5)
-fov = 30.0
+[node name="CameraPivot" type="Node3D" parent="." unique_id=547524891]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
-[node name="LabelMarker" type="Marker3D" parent="." unique_id=1577666844]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+[node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=1951030475]
 
-[node name="DebugLabel" type="Label" parent="." unique_id=1966770596]
-offset_right = 41.0
-offset_bottom = 28.0
-theme_override_font_sizes/font_size = 20
-text = "Test"
+[node name="PlayerUi" type="CanvasLayer" parent="." unique_id=1549861632]
 
-[node name="WorldPositionUpdater" type="Node" parent="DebugLabel" unique_id=1481121986 node_paths=PackedStringArray("_anchor")]
-script = ExtResource("6_liwyg")
-_anchor = NodePath("../../LabelMarker")
+[node name="Crosshair" type="TextureRect" parent="PlayerUi" unique_id=417331618]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("6_liwyg")
+stretch_mode = 2
