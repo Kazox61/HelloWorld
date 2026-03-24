@@ -16,7 +16,7 @@ public partial class MassiveStats : CanvasLayer {
 		if (ClientGameRunner.Instance.Client != null) {
 			_inputChannelLabel.Text = ClientGameRunner.Instance.LocalPlayerChannel.ToString();
 			// _rttLabel.Text = (ClientGameRunner.Instance.Client.Rtt * 1000).ToString("0.00") + "ms";
-			_approvedSimulationTickLabel.Text = ClientGameRunner.Instance.Client.TickSync.ApprovedSimulationTick.ToString();
+			// _approvedSimulationTickLabel.Text = ClientGameRunner.Instance.Client.TickSync.ApprovedSimulationTick.ToString();
 			_inputPredictionTick.Text = ClientGameRunner.Instance.Client.InputPredictionTick(ClientGameRunner.Instance.ClientTime).ToString();
 		}
 		
